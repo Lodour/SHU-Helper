@@ -10,7 +10,10 @@
 对`webAPI`进行登录测试。
 
 - [x] `private static String inputString(String txtHint)`
-带提示信息的字符串输入
+带提示信息的字符串输入。
+
+- [x] `private static void displayMatrix(String[][] mat)`
+显示二维数组。
 
 
 ## Utils
