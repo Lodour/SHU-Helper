@@ -4,7 +4,7 @@
 A helper for SHU website.
 
 ## package
-### [shuhelper.web](https://github.com/Lodour/SHU-Helper/tree/master/src/team/zgb3/shuhelper/web)
+### [shuhelper.web](https://github.com/Lodour/SHU-Helper/tree/master/src/shuhelper/web)
 > 实现相关网站的Java接口
 
 ### shuhelper.analyse
