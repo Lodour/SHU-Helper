@@ -33,8 +33,8 @@
 - [x] `public static Document postDocument(CloseableHttpClient client, String url, ArrayList<NameValuePair> data)`
 以`Jsoup.Document`返回`POST`某个页面的结果。
 
-- [x] `public static String[] parseTableRow(Element tr)`
-将`Document`中某一行`Element`中的所有列，转换为`String[]`。
+- [x] `public static String[][] parseTable2Array(Document doc, String selectorRow, String selectorCol)`
+以`String[][]`返回`Docuemnt`中的表格先后按照`selectorRow`和`selectorCol`进行选择的结果。
 
 
 ## BaseWebAPI
@@ -78,14 +78,14 @@
 - [x] `private Document getScoreSummaryDocument()`
 返回成绩大表页面的文档。
 
-- [ ] `private ArrayList<String[]> getScheduleArrayList(String strTermID)`
-返回`strTermID`学期课程安排页面的文档`ArrayList<String[]>`。
+- [x] `public String[][] getScheduleArray(String strTermID)`
+返回`strTermID`学期课程安排页面的文档`String[][]`。
 
-- [ ] `private ArrayList<String[]> getScoreTermArrayList(String strTermID)`
-返回`strTermID`学期成绩页面的文档`ArrayList<String[]>`。
+- [x] `public String[][] getScoreTermArray(String strTermID)`
+返回`strTermID`学期成绩页面的文档`String[][]`。
 
-- [ ] `private ArrayList<String[]> getScoreSummaryArrayList()`
-返回成绩大表页面的文档`ArrayList<String[]>`。
+- [x] `public String[][] getScoreSummaryArray()`
+返回成绩大表页面的文档`String[][]`。
 
 - [ ] `public void getSchedule(String strTermID)`
 将`strTermID`学期的课程安排存储在数据库中。
