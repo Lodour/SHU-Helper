@@ -8,7 +8,11 @@
  */
 package team.zgb3.shuhelper.web;
 
+import java.io.File;
 import java.util.Scanner;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 /**
  * @ClassName: Test
@@ -33,7 +37,6 @@ public class Test {
 	 */
 	public static void main(String[] args) throws Exception {
 		CJWebAPI CJ = new CJWebAPI();
-		testLogin(CJ);
 	}
 	
 	/**
@@ -47,27 +50,38 @@ public class Test {
 	public static void testLogin(BaseWebAPI webAPI) throws Exception {
 		String filePath = webAPI.getCaptcha();
 		System.out.println("Cpatcha saved to " + filePath);
-		String strUserNo = InputString("学号: ");
-		String strPasswd = InputString("密码: ");
-		String strCaptcha = InputString("验证码: ");
+		String strUserNo = inputString("学号: ");
+		String strPasswd = inputString("密码: ");
+		String strCaptcha = inputString("验证码: ");
 		String strLoginResult = webAPI.login(strUserNo, strPasswd, strCaptcha);
 		System.out.println("登录结果: " + strLoginResult);
-		if(strLoginResult == "OK") {
-			System.out.println(webAPI.getHTML(webAPI.urlIndex));
-		}
 	}
 	
 	/**
-	 * @Title: InputString
+	 * @Title: inputString
 	 * @Description: 带提示信息的字符串输入
 	 * @param @param txtHint
 	 * @param @return
 	 * @return String
 	 * @throws
 	 */
-	public static String InputString(String txtHint) {
+	public static String inputString(String txtHint) {
 		System.out.print(txtHint);
 		String strInput = in.next();
 		return strInput;
+	}
+
+	/**
+	 * @Title: loadHtmlFromFile
+	 * @Description: 从文件中加载HTML文档
+	 * @param @param filePath
+	 * @param @return
+	 * @param @throws Exception
+	 * @return Document
+	 * @throws
+	 */
+	public static Document parseFile(String filePath) throws Exception {
+		File inputFile = new File(filePath);
+		return Jsoup.parse(inputFile, "UTF-8");
 	}
 }
