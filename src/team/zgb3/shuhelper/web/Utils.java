@@ -23,6 +23,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 /**
  * @ClassName: Utils
@@ -125,5 +127,21 @@ public class Utils {
 	public static Document postDocument(CloseableHttpClient client, String url, List<NameValuePair> data)
 	throws ClientProtocolException, IOException {
 		return Jsoup.parse(postString(client, url, data));
+	}
+	
+	/**
+	 * @Title: parseTableRow
+	 * @Description: 将某一行Element转换为String[]
+	 * @param: @param rt
+	 * @param: @return
+	 * @return: String[]
+	 */
+	public static String[] parseTableRow(Element rt) {
+		Elements tds = rt.getElementsByTag("td");
+		String[] row = new String[tds.size()];
+		for(int i=0; i<tds.size(); i++) {
+			row[i] = tds.get(i).html();
+		}
+		return row;
 	}
 }
