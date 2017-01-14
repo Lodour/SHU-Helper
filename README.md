@@ -5,7 +5,7 @@ A helper for SHU website.
 
 ## package
 ### [team.zgb3.shuhelper.web](https://github.com/Lodour/SHU-Helper/tree/master/src/team/zgb3/shuhelper/web)
-> 实现相关网站的Java接口@Lodour
+> 实现相关网站的Java接口
 
 ### team.zgb3.shuhelper.analyse
 > 对成绩数据进行分析
@@ -17,4 +17,4 @@ A helper for SHU website.
 > 安排课表相关
 
 ### team.zgb3.shuhelper.ui
-> UI界面设计@Pealing
+> UI界面设计
