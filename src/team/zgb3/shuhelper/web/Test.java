@@ -8,10 +8,8 @@
  */
 package team.zgb3.shuhelper.web;
 
-import java.io.File;
 import java.util.Scanner;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 /**
@@ -26,7 +24,7 @@ public class Test {
 	 * @Fields in : Scanner(System.in)
 	 */
 	private static Scanner in = new Scanner(System.in);
-	
+
 	/**
 	 * @Title: main
 	 * @Description: 测试主方法
@@ -38,12 +36,10 @@ public class Test {
 	public static void main(String[] args) throws Exception {
 //		CJWebAPI CJ = new CJWebAPI();
 //		testLogin(CJ);
-//		Document doc = CJ.getSchedule("20161");
-//		System.out.println(doc.html());
-		Document doc = parseFile("./src/team/zgb3/shuhelper/web/html/CtrlStudentSchedule-20161.html");
-		System.out.println(doc.getElementsByTag("tr"));
+		Document doc = Utils.parseFile("./src/team/zgb3/shuhelper/web/html/CtrlStudentSchedule-20161.html");
+		System.out.println(doc.getElementsByTag("tr").get(4));
 	}
-	
+
 	/**
 	 * @Title: testLogin
 	 * @Description: 测试webAPI的登录功能
@@ -61,7 +57,7 @@ public class Test {
 		String strLoginResult = webAPI.login(strUserNo, strPasswd, strCaptcha);
 		System.out.println("登录结果: " + strLoginResult);
 	}
-	
+
 	/**
 	 * @Title: inputString
 	 * @Description: 带提示信息的字符串输入
@@ -74,20 +70,5 @@ public class Test {
 		System.out.print(txtHint);
 		String strInput = in.next();
 		return strInput;
-	}
-
-	/**
-	 * @Title: loadHtmlFromFile
-	 * @Description: 从文件中加载HTML文档
-	 * @param @param filePath
-	 * @param @return
-	 * @param @throws Exception
-	 * @return Document
-	 * @throws
-	 */
-	@SuppressWarnings("unused")
-	private static Document parseFile(String filePath) throws Exception {
-		File inputFile = new File(filePath);
-		return Jsoup.parse(inputFile, "UTF-8");
 	}
 }

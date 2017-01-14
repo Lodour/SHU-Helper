@@ -10,6 +10,7 @@ package team.zgb3.shuhelper.web;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
@@ -34,10 +35,10 @@ public class CJWebAPI extends BaseWebAPI {
 		urlIndex = "http://cj.shu.edu.cn/Home/StudentIndex";
 		urlCaptcha = "http://cj.shu.edu.cn/User/GetValidateCode?%20%20+%20GetTimestamp()";
 	}
-	
+
 	/**
-	 * @Title: getSchedule
-	 * @Description: 根据TermID返回课表
+	 * @Title: getScheduleDocument
+	 * @Description: 根据TermID返回课表页面的文档
 	 * @param @param strTermID
 	 * @param @return
 	 * @param @throws ParseException
@@ -45,11 +46,41 @@ public class CJWebAPI extends BaseWebAPI {
 	 * @return Document
 	 * @throws
 	 */
-	public Document getSchedule(String strTermID)
+	public Document getScheduleDocument(String strTermID)
 	throws ParseException, IOException {
 		String urlGetSchedule = "http://cj.shu.edu.cn/StudentPortal/CtrlStudentSchedule";
-		ArrayList<NameValuePair> postData = new ArrayList<NameValuePair>();
+		List<NameValuePair> postData = new ArrayList<NameValuePair>();
 		postData.add(new BasicNameValuePair("academicTermID", strTermID));
-		return postDocument(urlGetSchedule, postData);
+		return Utils.postDocument(httpClient, urlGetSchedule, postData);
+	}
+
+	/**
+	 * @Title: getScoreTermDocument
+	 * @Description: 返回某学期成绩的文档
+	 * @param: @param strTermID
+	 * @param: @return
+	 * @param: @throws IOException
+	 * @return: Document
+	 */
+	public Document getScoreTermDocument(String strTermID)
+	throws IOException {
+		String urlGetTermScore = "http://cj.shu.edu.cn/StudentPortal/CtrlScoreQuery";
+		List<NameValuePair> postData = new ArrayList<NameValuePair>();
+		postData.add(new BasicNameValuePair("academicTermID", strTermID));
+		return Utils.postDocument(httpClient, urlGetTermScore, postData);
+	}
+
+	/**
+	 * @Title: getScoreSummaryDocument
+	 * @Description: 返回成绩大表的文档
+	 * @param: @return
+	 * @param: @throws ParseException
+	 * @param: @throws IOException
+	 * @return: Document
+	 */
+	public Document getScoreSummaryDocument()
+	throws ParseException, IOException {
+		String urlGetScoreSummary = "http://cj.shu.edu.cn/StudentPortal/ScoreSummary";
+		return Utils.getDocument(httpClient, urlGetScoreSummary);
 	}
 }

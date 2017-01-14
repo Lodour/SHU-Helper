@@ -12,10 +12,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
-import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -41,24 +41,29 @@ import org.jsoup.select.Elements;
  */
 public abstract class BaseWebAPI {
 	/**
-	 * @Fields urlLogin : 登录URL
+	 * @Fields urlLogin : 登录页面的URL
 	 */
 	protected String urlLogin;
-	
+
 	/**
-	 * @Fields urlCaptcha : 验证码图片URL
+	 * @Fields urlCaptcha : 验证码图片的URL
 	 */
 	protected String urlCaptcha;
-	
+
 	/**
 	 * @Fields urlIndex : 登陆后的主页URL
 	 */
 	protected String urlIndex;
-	
+
 	/**
 	 * @Fields httpClient : http客户端
 	 */
 	protected CloseableHttpClient httpClient;
+
+	/**
+	 * @Fields strUserNo : 学号
+	 */
+	protected String strUserNo;
 	
 	/**
 	 * <p>Title: BaseWebAPI</p>
@@ -67,7 +72,77 @@ public abstract class BaseWebAPI {
 	public BaseWebAPI() {
 		httpClient = HttpClients.createDefault();
 	}
-	
+
+	/**
+	 * @Title: getCaptcha
+	 * @Description: 保存验证码图片到本地文件，并返回文件绝对路径
+	 * @param: @return
+	 * @param: @throws IOException
+	 * @return: String
+	 */
+	public String getCaptcha() throws IOException {
+		String fileName = "Captcha.jpg";
+		String filePath = null;
+		HttpGet getCaptcha = new HttpGet(urlCaptcha);
+		CloseableHttpResponse response = httpClient.execute(getCaptcha);
+		try {
+			File fileCaptcha = new File(fileName);
+			FileOutputStream fileOutputStream = new FileOutputStream(fileCaptcha);
+			try {
+				response.getEntity().writeTo(fileOutputStream);
+				filePath = fileCaptcha.getCanonicalPath();
+			} finally {
+				fileOutputStream.close();
+			}
+		} finally {
+			response.close();
+		}
+		return filePath;
+	}
+
+	/**
+	 * @throws IOException
+	 * @throws ClientProtocolException
+	 * @Title: login
+	 * @Description: 指定学号、密码、验证码登录，登录成功返回"OK"，否则返回错误信息
+	 * @param @param strUserNo
+	 * @param @param strPasswd
+	 * @param @param strCaptcha
+	 * @param @return
+	 * @return String
+	 * @throws
+	 */
+	public String login(String strUserNo, String strPasswd, String strCaptcha)
+	throws ClientProtocolException, IOException {
+		// 访问登录页面
+		this.strUserNo = strUserNo;
+		HttpGet getLoginPage = new HttpGet(urlLogin);
+		httpClient.execute(getLoginPage);
+
+		// 设定Post参数
+		List<NameValuePair> postData = new ArrayList<NameValuePair>();
+		postData.add(new BasicNameValuePair("txtUserNo", strUserNo));
+		postData.add(new BasicNameValuePair("txtPassword", strPasswd));
+		postData.add(new BasicNameValuePair("txtValidateCode", strCaptcha));
+
+		// 登录
+		String strLoginResult = "OK";
+		HttpPost postLoginPage = new HttpPost(urlLogin);
+		postLoginPage.setEntity(new UrlEncodedFormEntity(postData));
+		CloseableHttpResponse resPostLoginPage = httpClient.execute(postLoginPage);
+		try {
+			String htmlContent = EntityUtils.toString(resPostLoginPage.getEntity());
+			Document docLoginPage = Jsoup.parse(htmlContent);
+			Element errLogin = docLoginPage.getElementById("divLoginAlert");
+			if (errLogin != null) {
+				strLoginResult = errLogin.html();
+			}
+		} finally {
+			resPostLoginPage.close();
+		}
+		return strLoginResult;
+	}
+
 	/**
 	 * @Title: isLogin
 	 * @Description: 访问主页，判断是否处于登录状态
@@ -89,154 +164,6 @@ public abstract class BaseWebAPI {
 		Elements stuInfo = doc.getElementsByAttributeValue("style", "line-height: 23px;");
 		return stuInfo.size() == 2;
 	}
-	
-    /**
-     * @Title: getCaptcha
-     * @Description: 保存验证码图片到本地文件，并返回文件绝对路径
-     * @param @return
-     * @param @throws ClientProtocolException
-     * @param @throws IOException
-     * @return String
-     * @throws
-     */
-    public String getCaptcha() throws Exception {
-    	String fileName = "Captcha.jpg";
-        String filePath = null;
-        HttpGet getCaptcha = new HttpGet(urlCaptcha);
-        CloseableHttpResponse response = httpClient.execute(getCaptcha);
-        try {
-            File fileCaptcha = new File(fileName);
-            FileOutputStream fileOutputStream = new FileOutputStream(fileCaptcha);
-            try {
-                response.getEntity().writeTo(fileOutputStream);
-                filePath = fileCaptcha.getCanonicalPath();
-            } finally {
-                fileOutputStream.close();
-            }
-        } finally {
-            response.close();
-        }
-        return filePath;
-    }
-	
-	/**
-	 * @throws IOException 
-	 * @throws ClientProtocolException 
-	 * @Title: login
-	 * @Description: 指定学号、密码、验证码登录，登录成功返回"OK"，否则返回错误信息
-	 * @param @param strUserNo
-	 * @param @param strPasswd
-	 * @param @param strCaptcha
-	 * @param @return
-	 * @return String
-	 * @throws
-	 */
-	public String login(String strUserNo, String strPasswd, String strCaptcha)
-	throws ClientProtocolException, IOException{
-	    // 访问登录页面
-        HttpGet getLoginPage = new HttpGet(urlLogin);
-        httpClient.execute(getLoginPage);
-        
-        // 设定Post参数
-        ArrayList<NameValuePair> postData = new ArrayList<NameValuePair>();
-        postData.add(new BasicNameValuePair("txtUserNo", strUserNo));
-        postData.add(new BasicNameValuePair("txtPassword", strPasswd));
-        postData.add(new BasicNameValuePair("txtValidateCode", strCaptcha));
-        
-        // 登录
-        String strLoginResult = "OK";
-        HttpPost postLoginPage = new HttpPost(urlLogin);
-        postLoginPage.setEntity(new UrlEncodedFormEntity(postData));
-        CloseableHttpResponse resPostLoginPage = httpClient.execute(postLoginPage);
-        try {
-        	String htmlContent = EntityUtils.toString(resPostLoginPage.getEntity());
-        	Document docLoginPage = Jsoup.parse(htmlContent);
-        	Element errLogin = docLoginPage.getElementById("divLoginAlert");
-        	if (errLogin != null) {
-        		strLoginResult = errLogin.html();
-        	}
-        } finally {
-        	resPostLoginPage.close();
-        }
-        return strLoginResult;
-	}
 
-	/**
-	 * @Title: getHTML
-	 * @Description: 以String返回GET某个URL的HTML
-	 * @param: @param url
-	 * @param: @return
-	 * @param: @throws ClientProtocolException
-	 * @param: @throws IOException
-	 * @return: String
-	 */
-	protected String getHTML(String url)
-	throws ClientProtocolException, IOException {
-		HttpGet getPage = new HttpGet(url);
-		String htmlContent = null;
-		CloseableHttpResponse response = httpClient.execute(getPage);
-		try {
-			HttpEntity entity = response.getEntity();
-			htmlContent = EntityUtils.toString(entity);
-		} finally {
-			response.close();
-		}		
-		return htmlContent;
-	}
-	
-	
-	/**
-	 * @Title: postHTML
-	 * @Description: 返回POST某个URL返回的HTML
-	 * @param: @param url
-	 * @param: @param postData
-	 * @param: @return
-	 * @param: @throws IOException
-	 * @return: String
-	 */
-	protected String postHTML(String url, ArrayList<NameValuePair> postData)
-	throws IOException {
-        HttpPost postPage = new HttpPost(url);
-        String htmlContent = null;
-        postPage.setEntity(new UrlEncodedFormEntity(postData));
-        CloseableHttpResponse response = httpClient.execute(postPage);
-        try {
-        	HttpEntity entity = response.getEntity();
-        	htmlContent = EntityUtils.toString(entity);
-        } finally {
-        	response.close();
-        }
-        return htmlContent;
-	}
-
-	/**
-	 * @throws IOException 
-	 * @throws ParseException 
-	 * @Title: getDocument
-	 * @Description: 返回GET某个URL被Jsoup解析后的文档
-	 * @param @param url
-	 * @param @return
-	 * @param @throws Exception
-	 * @return Document
-	 * @throws
-	 */
-	protected Document getDocument(String url)
-	throws ParseException, IOException {
-		return Jsoup.parse(this.getHTML(url));
-	}
-	
-	/**
-	 * @Title: postDocument
-	 * @Description: 返回POST某个URL被Jsoup解析后的文档
-	 * @param: @param url
-	 * @param: @param postData
-	 * @param: @return
-	 * @param: @throws IOException
-	 * @return: Document
-	 */
-	protected Document postDocument(String url, ArrayList<NameValuePair> postData)
-	throws IOException {
-		return Jsoup.parse(this.postHTML(url, postData));
-	}
 }
 
