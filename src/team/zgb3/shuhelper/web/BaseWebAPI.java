@@ -27,6 +27,7 @@ import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 /**
  * @ClassName: BaseWebAPI
@@ -64,6 +65,28 @@ public abstract class BaseWebAPI {
 	 */
 	public BaseWebAPI() {
 		httpClient = HttpClients.createDefault();
+	}
+	
+	/**
+	 * @Title: isLogin
+	 * @Description: 访问主页，判断是否处于登录状态
+	 * @param @return
+	 * @param @throws Exception
+	 * @return boolean
+	 * @throws
+	 */
+	public boolean isLogin() throws Exception {
+		HttpGet getIndexPage = new HttpGet(urlIndex);
+		CloseableHttpResponse response = httpClient.execute(getIndexPage);
+		Document doc = null;
+		try {
+			HttpEntity entity = response.getEntity();
+			doc = Jsoup.parse(EntityUtils.toString(entity));
+		} finally {
+			response.close();
+		}
+		Elements stuInfo = doc.getElementsByAttributeValue("style", "line-height: 23px;");
+		return stuInfo.size() == 2;
 	}
 	
     /**
@@ -172,3 +195,4 @@ public abstract class BaseWebAPI {
 		return Jsoup.parse(this.getHTML(url));
 	}
 }
+
