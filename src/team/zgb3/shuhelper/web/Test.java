@@ -36,7 +36,12 @@ public class Test {
 	 * @throws
 	 */
 	public static void main(String[] args) throws Exception {
-		CJWebAPI CJ = new CJWebAPI();
+//		CJWebAPI CJ = new CJWebAPI();
+//		testLogin(CJ);
+//		Document doc = CJ.getSchedule("20161");
+//		System.out.println(doc.html());
+		Document doc = parseFile("./src/team/zgb3/shuhelper/web/html/CtrlStudentSchedule-20161.html");
+		System.out.println(doc.getElementsByTag("tr"));
 	}
 	
 	/**
@@ -65,7 +70,7 @@ public class Test {
 	 * @return String
 	 * @throws
 	 */
-	public static String inputString(String txtHint) {
+	private static String inputString(String txtHint) {
 		System.out.print(txtHint);
 		String strInput = in.next();
 		return strInput;
@@ -80,7 +85,8 @@ public class Test {
 	 * @return Document
 	 * @throws
 	 */
-	public static Document parseFile(String filePath) throws Exception {
+	@SuppressWarnings("unused")
+	private static Document parseFile(String filePath) throws Exception {
 		File inputFile = new File(filePath);
 		return Jsoup.parse(inputFile, "UTF-8");
 	}

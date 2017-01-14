@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
+import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -42,17 +43,17 @@ public abstract class BaseWebAPI {
 	/**
 	 * @Fields urlLogin : 登录URL
 	 */
-	public String urlLogin;
+	protected String urlLogin;
 	
 	/**
 	 * @Fields urlCaptcha : 验证码图片URL
 	 */
-	public String urlCaptcha;
+	protected String urlCaptcha;
 	
 	/**
 	 * @Fields urlIndex : 登陆后的主页URL
 	 */
-	public String urlIndex;
+	protected String urlIndex;
 	
 	/**
 	 * @Fields httpClient : http客户端
@@ -159,17 +160,18 @@ public abstract class BaseWebAPI {
         }
         return strLoginResult;
 	}
-	
+
 	/**
 	 * @Title: getHTML
-	 * @Description: 以String返回某个URL的HTML
-	 * @param @param url
-	 * @param @return
-	 * @param @throws Exception
-	 * @return String
-	 * @throws
+	 * @Description: 以String返回GET某个URL的HTML
+	 * @param: @param url
+	 * @param: @return
+	 * @param: @throws ClientProtocolException
+	 * @param: @throws IOException
+	 * @return: String
 	 */
-	public String getHTML(String url) throws Exception {
+	protected String getHTML(String url)
+	throws ClientProtocolException, IOException {
 		HttpGet getPage = new HttpGet(url);
 		String htmlContent = null;
 		CloseableHttpResponse response = httpClient.execute(getPage);
@@ -182,17 +184,59 @@ public abstract class BaseWebAPI {
 		return htmlContent;
 	}
 	
+	
 	/**
+	 * @Title: postHTML
+	 * @Description: 返回POST某个URL返回的HTML
+	 * @param: @param url
+	 * @param: @param postData
+	 * @param: @return
+	 * @param: @throws IOException
+	 * @return: String
+	 */
+	protected String postHTML(String url, ArrayList<NameValuePair> postData)
+	throws IOException {
+        HttpPost postPage = new HttpPost(url);
+        String htmlContent = null;
+        postPage.setEntity(new UrlEncodedFormEntity(postData));
+        CloseableHttpResponse response = httpClient.execute(postPage);
+        try {
+        	HttpEntity entity = response.getEntity();
+        	htmlContent = EntityUtils.toString(entity);
+        } finally {
+        	response.close();
+        }
+        return htmlContent;
+	}
+
+	/**
+	 * @throws IOException 
+	 * @throws ParseException 
 	 * @Title: getDocument
-	 * @Description: 返回某个URL被Jsoup解析后的文档
+	 * @Description: 返回GET某个URL被Jsoup解析后的文档
 	 * @param @param url
 	 * @param @return
 	 * @param @throws Exception
 	 * @return Document
 	 * @throws
 	 */
-	public Document getDocument(String url) throws Exception {
+	protected Document getDocument(String url)
+	throws ParseException, IOException {
 		return Jsoup.parse(this.getHTML(url));
+	}
+	
+	/**
+	 * @Title: postDocument
+	 * @Description: 返回POST某个URL被Jsoup解析后的文档
+	 * @param: @param url
+	 * @param: @param postData
+	 * @param: @return
+	 * @param: @throws IOException
+	 * @return: Document
+	 */
+	protected Document postDocument(String url, ArrayList<NameValuePair> postData)
+	throws IOException {
+		return Jsoup.parse(this.postHTML(url, postData));
 	}
 }
 
