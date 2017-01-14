@@ -23,7 +23,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
@@ -128,20 +127,26 @@ public class Utils {
 	throws ClientProtocolException, IOException {
 		return Jsoup.parse(postString(client, url, data));
 	}
-	
+
 	/**
-	 * @Title: parseTableRow
-	 * @Description: 将某一行Element转换为String[]
-	 * @param: @param rt
+	 * @Title: parseTable2Array
+	 * @Description: Document中的表格转换为二维数组
+	 * @param: @param doc
+	 * @param: @param selectorRow
+	 * @param: @param selectorCol
 	 * @param: @return
-	 * @return: String[]
+	 * @return: String[][]
 	 */
-	public static String[] parseTableRow(Element rt) {
-		Elements tds = rt.getElementsByTag("td");
-		String[] row = new String[tds.size()];
-		for(int i=0; i<tds.size(); i++) {
-			row[i] = tds.get(i).html();
+	public static String[][] parseTable2Array(Document doc, String selectorRow, String selectorCol) {
+		Elements rows = doc.select(selectorRow);
+		String[][] array  = new String[rows.size()][];
+		for (int i = 0; i < rows.size(); i++) {
+			Elements cols = rows.get(i).select(selectorCol);
+			array[i] = new String[cols.size()];
+			for (int j = 0; j < cols.size(); j++) {
+				array[i][j] = cols.get(j).html();
+			}
 		}
-		return row;
+		return array;
 	}
 }

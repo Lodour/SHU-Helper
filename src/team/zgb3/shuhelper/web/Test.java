@@ -8,9 +8,11 @@
  */
 package team.zgb3.shuhelper.web;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 /**
  * @ClassName: Test
@@ -34,10 +36,9 @@ public class Test {
 	 * @throws
 	 */
 	public static void main(String[] args) throws Exception {
-//		CJWebAPI CJ = new CJWebAPI();
-//		testLogin(CJ);
-		Document doc = Utils.parseFile("./src/team/zgb3/shuhelper/web/html/CtrlStudentSchedule-20161.html");
-		System.out.println(doc.getElementsByTag("tr").get(4));
+		CJWebAPI CJ = new CJWebAPI();
+		String[][] arraySchedule = CJ.getScoreSummaryArray();
+		displayMatrix(arraySchedule);
 	}
 
 	/**
@@ -70,5 +71,30 @@ public class Test {
 		System.out.print(txtHint);
 		String strInput = in.next();
 		return strInput;
+	}
+
+	/**
+	 * @Title: displayMatrix
+	 * @Description: 显示String二维数组mat
+	 * @param: @param mat
+	 * @return: void
+	 */
+	private static void displayMatrix(String[][] mat) {
+		if (mat == null || mat.length == 0) {
+			System.out.println("null/none");
+			return;
+		}
+		for (int i = 0; i < mat.length; i++) {
+			System.out.printf("[%d]", i);
+			String[] row = mat[i];
+			if (row == null || row.length == 0) {
+				System.out.println("null/none");
+				continue;
+			}
+			for (int j = 0; j < row.length; j++) {
+				System.out.print(" [" + row[j] + "]");
+			}
+			System.out.println();
+		}
 	}
 }
