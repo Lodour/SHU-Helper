@@ -1,12 +1,12 @@
 /**
  * @Title: Test.java
- * @Package team.zgb3.shuhelper.web
- * @Description: 测试team.zgb3.shuhelper.web
+ * @Package shuhelper.web
+ * @Description: 测试shuhelper.web
  * @author Roll (roll@busyliving.me)
  * @date 2017年1月13日 下午11:29:07
  * @version V1.0
  */
-package team.zgb3.shuhelper.web;
+package shuhelper.web;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,7 +16,7 @@ import org.jsoup.nodes.Element;
 
 /**
  * @ClassName: Test
- * @Description: 测试team.zgb3.shuhelper.web
+ * @Description: 测试shuhelper.web
  * @author Roll (roll@busyliving.me)
  * @date 2017年1月13日 下午11:29:07
  *
@@ -37,6 +37,7 @@ public class Test {
 	 */
 	public static void main(String[] args) throws Exception {
 		CJWebAPI CJ = new CJWebAPI();
+		testLogin(CJ);
 		String[][] arraySchedule = CJ.getScoreSummaryArray();
 		displayMatrix(arraySchedule);
 	}

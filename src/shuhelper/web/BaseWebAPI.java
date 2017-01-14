@@ -1,12 +1,12 @@
 /**
  * @Title: BaseWebAPI.java
- * @Package team.zgb3.shuhelper.web
+ * @Package shuhelper.web
  * @Description: TODO
  * @author Roll (roll@busyliving.me)
  * @date 2017年1月13日 下午10:56:52
  * @version V1.0
  */
-package team.zgb3.shuhelper.web;
+package shuhelper.web;
 
 import java.io.File;
 import java.io.FileOutputStream;

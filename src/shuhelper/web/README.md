@@ -1,4 +1,4 @@
-# team.zgb3.shuhelper.web
+# shuhelper.web
 > 实现`http://xk.shu.edu.cn`和`http://cj.shu.eud.cn`的API。
 
 ## Test

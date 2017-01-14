@@ -1,16 +1,16 @@
 /**
  * @Title: package-info.java
- * @Package team.zgb3.shuhelper.web
+ * @Package shuhelper.web
  * @Description: TODO
  * @author Roll (roll@busyliving.me)
- * @date 2017年1月13日 下午10:53:36
+ * @date 2017年1月15日 上午1:18:00
  * @version V1.0
  */
 /**
  * @ClassName: package-info
  * @Description: TODO
  * @author Roll (roll@busyliving.me)
- * @date 2017年1月13日 下午10:53:36
+ * @date 2017年1月15日 上午1:18:00
  *
  */
-package team.zgb3.shuhelper.web;
+package shuhelper.web;

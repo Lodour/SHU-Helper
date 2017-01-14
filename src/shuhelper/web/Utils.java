@@ -1,12 +1,12 @@
 /**
  * @Title: Utils.java
- * @Package team.zgb3.shuhelper.web
+ * @Package shuhelper.web
  * @Description: TODO
  * @author Roll (roll@busyliving.me)
  * @date 2017年1月14日 下午4:27:39
  * @version V1.0
  */
-package team.zgb3.shuhelper.web;
+package shuhelper.web;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,12 +1,12 @@
 /**
  * @Title: CJWebAPI.java
- * @Package team.zgb3.shuhelper.web
+ * @Package shuhelper.web
  * @Description: 实现http://cj.shu.edu.cn的网络API
  * @author Roll (roll@busyliving.me)
  * @date 2017年1月13日 下午11:01:32
  * @version V1.0
  */
-package team.zgb3.shuhelper.web;
+package shuhelper.web;
 
 import java.io.IOException;
 import java.util.ArrayList;
