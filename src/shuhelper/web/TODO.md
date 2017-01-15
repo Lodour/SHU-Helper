@@ -116,13 +116,13 @@
 - [x] `private Document getAllCourseDocument(String courseNo)`
 返回查询课程，且参数为`courseNo`时__所有结果__的文档。
 
-- [ ] `public String[][] getCourseTableArray()`
+- [x] `public String[][] getCourseTableArray()`
 返回已选课程`String[][]`。
 
-- [ ] `public String[][] getEnrollRankArray()`
+- [x] `public String[][] getEnrollRankArray()`
 返回选课排名`String[][]`。
 
-- [ ] `public String[][] getAllCourseArray(String courseNo)`
+- [x] `public String[][] getAllCourseArray(String courseNo)`
 返回查询课程，且参数为`courseNo`时__所有结果__的文档`String[][]`。
 
 - [ ] `public void getCourseTable()`

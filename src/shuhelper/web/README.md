@@ -145,3 +145,47 @@ for(String term : termInfo) {
 // 选择第0个学期
 XK.setTerm(0);
 ```
+
+### 已选课程
+`String[][] getCourseTableArray()`方法返回二维String数组的引用，显示已选课程，每行一门课。
+
+> 课程号, 课程名, 教师号, 教师名, 学分, 上课时间, 上课地点, 校区, 答疑时间, 答疑地点
+
+```java
+String[][] courseTable = web.getCourseTableArray();
+for(String[] course : courseTable) {
+	for(String field : course)
+		System.out.print(field + " ");
+	System.out.println();
+}
+```
+
+### 选课排名
+`String[][] getEnrollRankArray()`方法返回二维String数组的引用，显示选课排名，每行一门课。
+
+> 课程号, 课程名, 教师号, 教师名, 选课人数, 额定人数, 排名
+
+```java
+String[][] enrollRank = web.getEnrollRankArray();
+for(String[] course : enrollRank) {
+	for(String field : course)
+		System.out.print(field + " ");
+	System.out.println();
+}
+```
+
+### 查询课程
+`String[][] getAllCourseArray(String courseNo)`方法返回二维String数组的引用，显示所有查询结果，每行一节课。
+
+> 课程号, 课程名, 学分, 教师号, 教师名, 上课时间, 上课地点, 容量, 人数, 校区, 选课限制, 答疑时间, 答疑地点
+
+```java
+// 查询所有计算机学院的课
+// 时间可能会比较长
+String[][] allCourseQuery = web.getAllCourseArray("0830");
+for(String[] course : allCourseQuery) {
+	for(String field : course)
+		System.out.print(field + " ");
+	System.out.println();
+}
+```

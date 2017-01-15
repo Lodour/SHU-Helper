@@ -13,6 +13,8 @@ public class TestWebAPI {
 	public static void main(String[] args) throws Exception {
 		XKWebAPI web = new XKWebAPI();
 		testLogin(web);
+		String[][] a = web.getAllCourseArray("R");
+		displayMatrix(a);
 	}
 	
 	private static void testLogin(WebAPI webAPI) throws Exception {

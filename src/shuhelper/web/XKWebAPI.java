@@ -14,6 +14,8 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 /**
  * @ClassName: XKWebAPI
@@ -93,7 +95,7 @@ public class XKWebAPI extends WebAPI {
 	 * @return: Document
 	 */
 	private Document getEnrollRankDocument() throws Exception {
-		String url = urlLogin + "/StudentQuery/QueryEnrollRank";
+		String url = urlLogin + "/DataQuery/CtrlQueryEnrollRank";
 		return Utils.getDocument(httpClient, url);
 	}
 	
@@ -124,5 +126,68 @@ public class XKWebAPI extends WebAPI {
 		data.add(new BasicNameValuePair("PageSize", "10000")); // ensure all results returned
 		data.add(new BasicNameValuePair("FunctionString", "InitPage"));
 		return Utils.postDocument(httpClient, url, data);
+	}
+	
+	/**
+	 * @Title: getCourseTableArray
+	 * @Description: 返回已选课程
+	 * @param: @return
+	 * @param: @throws Exception
+	 * @return: String[][] 课程号, 课程名, 教师号, 教师名, 学分, 上课时间, 上课地点, 校区, 答疑时间, 答疑地点
+	 */
+	public String[][] getCourseTableArray() throws Exception {
+		Document doc = getCourseTableDocument();
+		String selectorRow = "tr:has(td:eq(10)):not(tr:has(td:gt(10)))";
+		String selectorCol = "td:gt(0)";
+		return Utils.parseTable2Array(doc, selectorRow, selectorCol);
+	}
+	
+	/**
+	 * @Title: getEnrollRankArray
+	 * @Description: 返回选课排名
+	 * @param: @return
+	 * @param: @throws Exception
+	 * @return: String[][] 课程号, 课程名, 教师号, 教师名, 选课人数, 额定人数, 排名
+	 */
+	public String[][] getEnrollRankArray() throws Exception {
+		Document doc = getEnrollRankDocument();
+		String selectorRow = "tr:has(td:eq(6)):not(tr:has(td:gt(6)))";
+		String selectorCol = "td";
+		return Utils.parseTable2Array(doc, selectorRow, selectorCol);
+	}
+	
+	/**
+	 * @Title: getAllCourseArray
+	 * @Description: 返回查询courseNo时的所有结果
+	 * @param: @param courseNo
+	 * @param: @return
+	 * @param: @throws Exception
+	 * @return: String[][] 课程号, 课程名, 学分, 教师号, 教师名, 上课时间, 上课地点, 容量, 人数, 校区, 选课限制, 答疑时间, 答疑地点
+	 */
+	public String[][] getAllCourseArray(String courseNo) throws Exception {
+		Document doc = getAllCourseDocument(courseNo);
+		// 选择所有有效行（至少存在10列）
+		Elements rows = doc.select("tr:has(td:eq(9))");
+		String[][] array = new String[rows.size()][13];
+		String[] courseHeadInfo = new String[3];
+		for (int i = 0; i < rows.size(); i++) {
+			Elements cols = rows.get(i).select("td");
+			// 如果该行有13列，则认为包含课程信息头（课程号 课程名 学分），并记录
+			if (cols.size() == 13) {
+				for(int j = 0; j < 3; j++) {
+					courseHeadInfo[j] = cols.get(j).html();
+				}
+			}
+			// 记录该条信息
+			String[] info = array[i];
+			int k = 0;
+			for(k = 0; k < 3; k++) {
+				info[k] = courseHeadInfo[k];
+			}
+			for(int j = cols.size() - 10; j < cols.size(); j++) {
+				info[k++] = cols.get(j).html();
+			}
+		}
+		return array;
 	}
 }
