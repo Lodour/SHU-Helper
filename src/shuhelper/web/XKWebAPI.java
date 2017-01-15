@@ -8,6 +8,11 @@
  */
 package shuhelper.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.jsoup.nodes.Document;
 
 /**
@@ -75,10 +80,49 @@ public class XKWebAPI extends WebAPI {
 	 * @param: @throws Exception
 	 * @return: Document
 	 */
-	public Document getCourseTableDocument() throws Exception {
-		String url = urlIndex;
-		Document doc = Utils.getDocument(httpClient, url);
-		System.out.println(doc.getElementsMatchingText("14123090").size());
-		return doc;
+	private Document getCourseTableDocument() throws Exception {
+		String url = urlLogin + "/StudentQuery/CtrlViewQueryCourseTable";
+		return Utils.getDocument(httpClient, url);
+	}
+	
+	/**
+	 * @Title: getEnrollRankDocument
+	 * @Description: 返回选课排名页面的文档
+	 * @param: @return
+	 * @param: @throws Exception
+	 * @return: Document
+	 */
+	private Document getEnrollRankDocument() throws Exception {
+		String url = urlLogin + "/StudentQuery/QueryEnrollRank";
+		return Utils.getDocument(httpClient, url);
+	}
+	
+	/**
+	 * @Title: getAllCourseDocument
+	 * @Description: 返回查询courseNo所有结果的页面文档
+	 * @param: @param courseNo
+	 * @param: @return
+	 * @param: @throws Exception
+	 * @return: Document
+	 */
+	private Document getAllCourseDocument(String courseNo) throws Exception {
+		String url = urlLogin + "/StudentQuery/CtrlViewQueryCourse";
+		List<NameValuePair> data = new ArrayList<NameValuePair>();
+		data.add(new BasicNameValuePair("CourseNo", courseNo));
+		data.add(new BasicNameValuePair("CourseName", ""));
+		data.add(new BasicNameValuePair("TeachNo", ""));
+		data.add(new BasicNameValuePair("TeachName", ""));
+		data.add(new BasicNameValuePair("CourseTime", ""));
+		data.add(new BasicNameValuePair("NotFull", "false"));
+		data.add(new BasicNameValuePair("Credit", ""));
+		data.add(new BasicNameValuePair("Campus", "0"));
+		data.add(new BasicNameValuePair("Enrolls", ""));
+		data.add(new BasicNameValuePair("DataCount", "0"));
+		data.add(new BasicNameValuePair("MinCapacity", ""));
+		data.add(new BasicNameValuePair("MaxCapacity", ""));
+		data.add(new BasicNameValuePair("PageIndex", "1"));    // thus need only the 1st page
+		data.add(new BasicNameValuePair("PageSize", "10000")); // ensure all results returned
+		data.add(new BasicNameValuePair("FunctionString", "InitPage"));
+		return Utils.postDocument(httpClient, url, data);
 	}
 }

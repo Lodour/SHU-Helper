@@ -8,11 +8,7 @@
  */
 package shuhelper.web;
 
-import java.util.ArrayList;
 import java.util.Scanner;
-
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 
 /**
  * @ClassName: Test
@@ -36,8 +32,8 @@ public class Test {
 	 * @throws
 	 */
 	public static void main(String[] args) throws Exception {
-		WebAPI XK = new XKWebAPI();
-		
+		XKWebAPI web = new XKWebAPI();
+		testLogin(web);
 	}
 
 	/**
@@ -78,6 +74,7 @@ public class Test {
 	 * @param: @param mat
 	 * @return: void
 	 */
+	@SuppressWarnings("unused")
 	private static void displayMatrix(String[][] mat) {
 		if (mat == null || mat.length == 0) {
 			System.out.println("null/none");

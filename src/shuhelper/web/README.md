@@ -121,11 +121,29 @@
 - [x] `public void setTerm(int idx)`
 设置api的学期为`getTermInfo()`方法返回数组的第`idx`个。
 
-- [ ] `private Document getCourseTableDocument()`
-返回课表查询页面的文档。
+- [x] `private Document getCourseTableDocument()`
+返回已选课程页面的文档。
 
-- [ ] `private Document getEnrollRankDocument()`
+- [x] `private Document getEnrollRankDocument()`
 返回选课排名页面的文档。
 
-- [ ] `private Document getAllCourseDocument(int pageIndex, int pageSize)`
-返回查询所有课程，且参数为`pageIndex`和`pageSize`时的页面文档。
+- [x] `private Document getAllCourseDocument(String courseNo)`
+返回查询课程，且参数为`courseNo`时__所有结果__的文档。
+
+- [ ] `public String[][] getCourseTableArray()`
+返回已选课程`String[][]`。
+
+- [ ] `public String[][] getEnrollRankArray()`
+返回选课排名`String[][]`。
+
+- [ ] `public String[][] getAllCourseArray(String courseNo)`
+返回查询课程，且参数为`courseNo`时__所有结果__的文档`String[][]`。
+
+- [ ] `public void getCourseTable()`
+将已选课程存储在数据库中（会删除之前的记录）。
+
+- [ ] `public void getEnrollRank()`
+将选课排名存储在数据库中（会删除之前的记录）。
+
+- [ ] `public void getAllCourse(String courseNo)`
+将所有查询结果存储在数据库中。
