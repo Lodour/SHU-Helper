@@ -1,20 +1,6 @@
 # shuhelper.web
 > 实现`http://xk.shu.edu.cn`和`http://cj.shu.eud.cn`的API。
 
-## Test
-
-> 测试用
-
-### 成员方法
-- [x] `public static void testLogin(WebAPI webAPI)`
-对`webAPI`进行登录测试。
-
-- [x] `private static String inputString(String txtHint)`
-带提示信息的字符串输入。
-
-- [x] `private static void displayMatrix(String[][] mat)`
-显示二维数组。
-
 
 ## Utils
 
