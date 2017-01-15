@@ -5,36 +5,24 @@ import java.util.Scanner;
 
 import shuhelper.web.CJWebAPI;
 import shuhelper.web.WebAPI;
+import shuhelper.web.XKWebAPI;
 
-public class TestWebAPI {	
-	public static void main(String[] args) throws IOException {
-		// 实例化 CJWebAPI
-		CJWebAPI webAPI = new CJWebAPI();
-		
-		// 获取验证码图片的绝对地址
+public class TestWebAPI {
+	private static Scanner in = new Scanner(System.in);
+	
+	public static void main(String[] args) throws Exception {
+		XKWebAPI web = new XKWebAPI();
+		testLogin(web);
+	}
+	
+	private static void testLogin(WebAPI webAPI) throws Exception {
 		String filePath = webAPI.getCaptcha();
 		System.out.println("Cpatcha saved to " + filePath);
-		
-		// 输入参数并登陆
-		Scanner in = new Scanner(System.in);
-		String strUserNo = "***";
-		String strPasswd = "***";
-		System.out.print("验证码: ");
-		String strCaptcha = in.next();
-		in.close();
+		String strUserNo = inputString("学号: ");
+		String strPasswd = inputString("密码: ");
+		String strCaptcha = inputString("验证码: ");
 		String strLoginResult = webAPI.login(strUserNo, strPasswd, strCaptcha);
 		System.out.println("登录结果: " + strLoginResult);
-		
-		// 查询学期成绩
-		if (strLoginResult == "OK") {
-			try {
-				String[][] scoreTerm = webAPI.getScoreTermArray("20161");
-				displayMatrix(scoreTerm);
-			} catch (Exception e) {
-				System.out.println(e.toString());
-				e.printStackTrace();
-			}
-		}
 	}
 	
 	/**
@@ -61,5 +49,11 @@ public class TestWebAPI {
 			}
 			System.out.println();
 		}
+	}
+	
+	private static String inputString(String txtHint) {
+		System.out.print(txtHint);
+		String strInput = in.next();
+		return strInput;
 	}
 }
