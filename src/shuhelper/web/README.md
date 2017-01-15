@@ -119,3 +119,29 @@ String[][] arrayScoreTerm = CJ.getScoreTermArray(strTermID);
 ```java
 String[][] arrayScoreSummary = CJ.getScoreSummaryArray();
 ```
+
+
+## `XKWebAPI`类
+> 继承自`WebAPI`，实现`http://xk.autoisp.shu.eud.cn`的网络接口。
+
+### 学期信息
+一般情况下，选课网站分为80端口和8080端口两个页面，分别提供相邻两个学期的选课。
+
+> http://xk.autoisp.shu.eud.cn
+>
+> http://xk.autoisp.shu.eud.cn:8080
+
+`String[] getTermInfo()`方法返回String数组的引用，显示当前可选学期的信息。
+
+`void setTerm(int idx)`则指定使用数组中第`idx`个学期。
+
+需要注意的是，`XKWebAPI`在确定学期之后需要重新获取验证码。
+
+```java
+String[] termInfo = XK.getTermInfo();
+for(String term : termInfo) {
+	System.out.println(term);
+}
+// 选择第0个学期
+XK.setTerm(0);
+```
