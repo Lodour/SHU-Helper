@@ -116,29 +116,21 @@ public abstract class WebAPI {
 	throws ClientProtocolException, IOException {
 		// 访问登录页面
 		this.strUserNo = strUserNo;
-		HttpGet getLoginPage = new HttpGet(urlLogin);
-		httpClient.execute(getLoginPage);
+		Document docLogin = Utils.getDocument(httpClient, urlLogin);
 
 		// 设定Post参数
+		String[] loginFields = Utils.getLoginFields(docLogin);
 		List<NameValuePair> postData = new ArrayList<NameValuePair>();
-		postData.add(new BasicNameValuePair("txtUserNo", strUserNo));
-		postData.add(new BasicNameValuePair("txtPassword", strPasswd));
-		postData.add(new BasicNameValuePair("txtValidateCode", strCaptcha));
+		postData.add(new BasicNameValuePair(loginFields[0], strUserNo));
+		postData.add(new BasicNameValuePair(loginFields[1], strPasswd));
+		postData.add(new BasicNameValuePair(loginFields[2], strCaptcha));
 
 		// 登录
 		String strLoginResult = "OK";
-		HttpPost postLoginPage = new HttpPost(urlLogin);
-		postLoginPage.setEntity(new UrlEncodedFormEntity(postData));
-		CloseableHttpResponse resPostLoginPage = httpClient.execute(postLoginPage);
-		try {
-			String htmlContent = EntityUtils.toString(resPostLoginPage.getEntity());
-			Document docLoginPage = Jsoup.parse(htmlContent);
-			Element errLogin = docLoginPage.getElementById("divLoginAlert");
-			if (errLogin != null) {
-				strLoginResult = errLogin.html();
-			}
-		} finally {
-			resPostLoginPage.close();
+		Document docLoginPage = Utils.postDocument(httpClient, urlLogin, postData);
+		Element errLogin = docLoginPage.getElementById("divLoginAlert");
+		if (errLogin != null) {
+			strLoginResult = errLogin.html();
 		}
 		return strLoginResult;
 	}
@@ -152,18 +144,8 @@ public abstract class WebAPI {
 	 * @throws
 	 */
 	public boolean isLogin() throws Exception {
-		HttpGet getIndexPage = new HttpGet(urlIndex);
-		CloseableHttpResponse response = httpClient.execute(getIndexPage);
-		Document doc = null;
-		try {
-			HttpEntity entity = response.getEntity();
-			doc = Jsoup.parse(EntityUtils.toString(entity));
-		} finally {
-			response.close();
-		}
-		Elements stuInfo = doc.getElementsByAttributeValue("style", "line-height: 23px;");
-		return stuInfo.size() == 2;
+		Document docIndexPage = Utils.getDocument(httpClient, urlIndex);
+		return docIndexPage.getElementsMatchingText(strUserNo).size() != 0;
 	}
-
 }
 
