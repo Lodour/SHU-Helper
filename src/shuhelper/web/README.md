@@ -6,7 +6,7 @@
 > 测试用
 
 ### 成员方法
-- [x] `public static void testLogin(BaseWebAPI webAPI)`
+- [x] `public static void testLogin(WebAPI webAPI)`
 对`webAPI`进行登录测试。
 
 - [x] `private static String inputString(String txtHint)`
@@ -39,8 +39,11 @@
 - [x] `public static String[][] parseTable2Array(Document doc, String selectorRow, String selectorCol)`
 以`String[][]`返回`Document`中的表格先后按照`selectorRow`和`selectorCol`进行选择的结果。
 
+- [x] `public String[] getLoginFields(Document doc)`
+从登录页面的文档中获取需提交的字段名。
 
-## BaseWebAPI
+
+## WebAPI
 
 > 基本的网络API抽象类。
 
@@ -69,7 +72,7 @@
 
 ## CJWebAPI
 
-> 继承于`BaseWebAPI`，实现`http://cj.shu.edu.cn`的部分功能。
+> 继承于`WebAPI`，实现`http://cj.shu.edu.cn`的部分功能。
 
 ### 成员方法
 - [x] `private Document getScheduleDocument(String strTermID)`
@@ -102,13 +105,20 @@
 
 ## XKWebAPI
 
-> 继承于`BaseWebAPI`，实现`http://xk.autoisp.shu.edu.cn[:8080]`的部分功能。
+> 继承于`WebAPI`，实现`http://xk.autoisp.shu.edu.cn[:8080]`的部分功能。
+
+### 成员变量
+|变量名|修饰符|类型|功能|
+|:------------:|:-----:|:----:|:-------------------:|
+|port          |private|int   |网页端口               |
+|allPorts      |private|int[] |所有可选的端口号        |
+|urlLoginFormat|private|String|登录页面的URL带端口的格式|
 
 ### 成员方法
-- [ ] `public String[] getTermInfo()`
-返回字符串数组，依次记录[80]和[8080]端口的学期。
+- [x] `public String[] getTermInfo()`
+返回字符串数组，依次记录可选端口的学期。
 
-- [ ] `public void setTerm(int idx)`
+- [x] `public void setTerm(int idx)`
 设置api的学期为`getTermInfo()`方法返回数组的第`idx`个。
 
 - [ ] `private Document getCourseTableDocument()`

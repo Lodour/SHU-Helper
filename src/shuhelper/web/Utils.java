@@ -149,4 +149,13 @@ public class Utils {
 		}
 		return array;
 	}
+	
+	public static String[] getLoginFields(Document doc) {
+		String[] fields = new String[3];
+		Elements eleInputFields = doc.select("input[id~=^txt\\w+]");
+		for (int i = 0; i < 3; i++) {
+			fields[i] = eleInputFields.get(i).attr("id");
+		}
+		return fields;
+	}
 }
