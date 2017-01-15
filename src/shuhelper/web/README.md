@@ -37,7 +37,7 @@
 以`Jsoup.Document`返回`POST`某个页面的结果。
 
 - [x] `public static String[][] parseTable2Array(Document doc, String selectorRow, String selectorCol)`
-以`String[][]`返回`Docuemnt`中的表格先后按照`selectorRow`和`selectorCol`进行选择的结果。
+以`String[][]`返回`Document`中的表格先后按照`selectorRow`和`selectorCol`进行选择的结果。
 
 
 ## BaseWebAPI
@@ -103,3 +103,19 @@
 ## XKWebAPI
 
 > 继承于`BaseWebAPI`，实现`http://xk.autoisp.shu.edu.cn[:8080]`的部分功能。
+
+### 成员方法
+- [ ] `public String[] getTermInfo()`
+返回字符串数组，依次记录[80]和[8080]端口的学期。
+
+- [ ] `public void setTerm(int idx)`
+设置api的学期为`getTermInfo()`方法返回数组的第`idx`个。
+
+- [ ] `private Document getCourseTableDocument()`
+返回课表查询页面的文档。
+
+- [ ] `private Document getEnrollRankDocument()`
+返回选课排名页面的文档。
+
+- [ ] `private Document getAllCourseDocument(int pageIndex, int pageSize)`
+返回查询所有课程，且参数为`pageIndex`和`pageSize`时的页面文档。
