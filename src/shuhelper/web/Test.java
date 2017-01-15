@@ -36,10 +36,8 @@ public class Test {
 	 * @throws
 	 */
 	public static void main(String[] args) throws Exception {
-		CJWebAPI CJ = new CJWebAPI();
-		testLogin(CJ);
-		String[][] arraySchedule = CJ.getScoreSummaryArray();
-		displayMatrix(arraySchedule);
+		WebAPI XK = new XKWebAPI();
+		
 	}
 
 	/**
@@ -50,7 +48,7 @@ public class Test {
 	 * @return void
 	 * @throws
 	 */
-	public static void testLogin(BaseWebAPI webAPI) throws Exception {
+	public static void testLogin(WebAPI webAPI) throws Exception {
 		String filePath = webAPI.getCaptcha();
 		System.out.println("Cpatcha saved to " + filePath);
 		String strUserNo = inputString("学号: ");

@@ -1,5 +1,5 @@
 /**
- * @Title: BaseWebAPI.java
+ * @Title: WebAPI.java
  * @Package shuhelper.web
  * @Description: TODO
  * @author Roll (roll@busyliving.me)
@@ -31,7 +31,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
- * @ClassName: BaseWebAPI
+ * @ClassName: WebAPI
  * @Description:
  *  1、基本的网络API抽象类，应该被继承为更高级的API，如CJWebAPI和XKWebAPI。
  *  2、urlLogin/urlIndex/urlCaptcha应该在子类的构造函数中定义。
@@ -39,7 +39,7 @@ import org.jsoup.select.Elements;
  * @date 2017年1月13日 下午10:56:52
  *
  */
-public abstract class BaseWebAPI {
+public abstract class WebAPI {
 	/**
 	 * @Fields urlLogin : 登录页面的URL
 	 */
@@ -66,10 +66,10 @@ public abstract class BaseWebAPI {
 	protected String strUserNo;
 	
 	/**
-	 * <p>Title: BaseWebAPI</p>
+	 * <p>Title: WebAPI</p>
 	 * <p>Description: 构造函数</p>
 	 */
-	public BaseWebAPI() {
+	public WebAPI() {
 		httpClient = HttpClients.createDefault();
 	}
 

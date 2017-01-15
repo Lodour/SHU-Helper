@@ -26,7 +26,7 @@ import org.jsoup.select.Elements;
  * @date 2017年1月13日 下午11:01:32
  *
  */
-public class CJWebAPI extends BaseWebAPI {
+public class CJWebAPI extends WebAPI {
 	/**
 	 * <p>Title: CJWebAPI</p>
 	 * <p>Description: 构造函数</p>
