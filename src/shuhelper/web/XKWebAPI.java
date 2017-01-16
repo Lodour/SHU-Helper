@@ -35,9 +35,10 @@ public class XKWebAPI extends WebAPI {
 	private int[] allPorts = {80, 8080};
 
 
-	public XKWebAPI() throws IOException {
+	public XKWebAPI() throws Exception {
 		super();
 		setTerm(0);
+		Utils.initDataBase("XK", "XK_sqlInitDataBase");
 	}
 
 	/**
@@ -66,7 +67,7 @@ public class XKWebAPI extends WebAPI {
 	 */
 	public void setTerm(int idx) throws IOException {
 		port = allPorts[idx];
-		urlLoginFormat = Utils.getProperty("XK_urlLoginFormat");
+		String urlLoginFormat = Utils.getProperty("XK_urlLoginFormat");
 		urlLogin = String.format(urlLoginFormat, port);
 		urlIndex = urlLogin + Utils.getProperty("XK_urlIndexSuffix");
 		urlCaptcha = urlLogin + Utils.getProperty("XK_urlCaptchaSuffix");

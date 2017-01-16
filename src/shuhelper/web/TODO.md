@@ -35,6 +35,9 @@
 - [x] `public static String getProperty(String key)`
 获取当前类目录下属性文件中，键`key`的值。
 
+- [x] `public static void initDataBase(String dbName, String propKeyNameOfSql)`
+初始化数据库。
+
 ## WebAPI
 
 > 基本的网络API抽象类。
@@ -57,9 +60,6 @@
 
 - [x] `public boolean isLogin()`
 判断客户端是否处于登录状态。
-
-- [ ] `public void initDataBase()`
-初始化数据库。
 
 
 ## CJWebAPI

@@ -32,11 +32,12 @@ public class CJWebAPI extends WebAPI {
 	 * <p>Description: 构造函数</p>
 	 * @throws IOException
 	 */
-	public CJWebAPI() throws IOException {
+	public CJWebAPI() throws Exception {
 		super();
 		urlLogin = Utils.getProperty("CJ_urlLogin");
 		urlIndex = urlLogin + Utils.getProperty("CJ_urlIndexSuffix");
 		urlCaptcha = urlLogin + Utils.getProperty("CJ_urlCaptchaSuffix");
+		Utils.initDataBase("CJ", "CJ_sqlInitDataBase");
 	}
 
 	/**

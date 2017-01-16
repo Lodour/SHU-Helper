@@ -3,6 +3,7 @@ package shuhelper;
 import java.util.Scanner;
 
 import shuhelper.web.CJWebAPI;
+import shuhelper.web.Utils;
 import shuhelper.web.WebAPI;
 import shuhelper.web.XKWebAPI;
 
@@ -11,8 +12,8 @@ public class TestWebAPI {
 	
 	public static void main(String[] args) throws Exception {
 		CJWebAPI web = new CJWebAPI();
-		testLogin(web);
-		displayMatrix(web.getScoreSummaryArray());
+//		testLogin(web);
+//		displayMatrix(web.getScoreSummaryArray());
 	}
 	
 	private static void testLogin(WebAPI webAPI) throws Exception {

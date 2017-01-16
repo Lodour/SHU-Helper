@@ -61,8 +61,9 @@ public abstract class WebAPI {
 	/**
 	 * <p>Title: WebAPI</p>
 	 * <p>Description: 构造函数</p>
+	 * @throws ClassNotFoundException 
 	 */
-	public WebAPI() {
+	public WebAPI() throws Exception {
 		httpClient = HttpClients.createDefault();
 	}
 
