@@ -37,7 +37,6 @@ public class CJWebAPI extends WebAPI {
 		urlLogin = Utils.getProperty("CJ_urlLogin");
 		urlIndex = urlLogin + Utils.getProperty("CJ_urlIndexSuffix");
 		urlCaptcha = urlLogin + Utils.getProperty("CJ_urlCaptchaSuffix");
-		Utils.initDataBase("CJ", "CJ_sqlInitDataBase");
 	}
 
 	/**

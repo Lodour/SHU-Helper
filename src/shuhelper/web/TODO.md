@@ -35,8 +35,6 @@
 - [x] `public static String getProperty(String key)`
 获取当前类目录下属性文件中，键`key`的值。
 
-- [x] `public static void initDataBase(String dbName, String propKeyNameOfSql)`
-初始化数据库。
 
 ## WebAPI
 
@@ -85,15 +83,6 @@
 - [x] `public ArrayList<String[]> getScoreSummaryArrayList()`
 返回成绩大表页面的文档`ArrayList<String[]>`。
 
-- [ ] `public void getSchedule(String strTermID)`
-将`strTermID`学期的课程安排存储在数据库中。
-
-- [ ] `public void getScoreTerm(String strTermID)`
-将`strTermID`学期的成绩存储在数据库中。
-
-- [ ] `public void getScoreSummary()`
-将成绩大表存储在数据库中。
-
 
 ## XKWebAPI
 
@@ -131,12 +120,3 @@
 
 - [x] `public ArrayList<String[]> getAllCourseArrayList(String courseNo)`
 返回查询课程，且参数为`courseNo`时__所有结果__的文档`ArrayList<String[]>`。
-
-- [ ] `public void getCourseTable()`
-将已选课程存储在数据库中（会删除之前的记录）。
-
-- [ ] `public void getEnrollRank()`
-将选课排名存储在数据库中（会删除之前的记录）。
-
-- [ ] `public void getAllCourse(String courseNo)`
-将所有查询结果存储在数据库中。

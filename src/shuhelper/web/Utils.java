@@ -11,9 +11,6 @@ package shuhelper.web;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -184,24 +181,5 @@ public class Utils {
 			is.close();
 		}
 		return properties.get(key);
-	}
-	
-	/**
-	 * @Title: initDataBase
-	 * @Description: 初始化数据库
-	 * @param: 
-	 * @return: void
-	 */
-	public static void initDataBase(String dbName, String propKeyNameOfSql) throws Exception {
-		// 连接数据库
-		Connection conn = null;
-		Class.forName("org.sqlite.JDBC");
-		conn = DriverManager.getConnection("jdbc:sqlite:" + dbName + ".db");
-		Statement stmt = conn.createStatement();
-		// 初始化
-		String sqlCreateDatabase = Utils.getProperty(propKeyNameOfSql);
-		stmt.executeUpdate(sqlCreateDatabase);
-		stmt.close();
-	    conn.close();
 	}
 }

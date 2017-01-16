@@ -39,7 +39,6 @@ public class XKWebAPI extends WebAPI {
 	public XKWebAPI() throws Exception {
 		super();
 		setTerm(0);
-		Utils.initDataBase("XK", "XK_sqlInitDataBase");
 	}
 
 	/**

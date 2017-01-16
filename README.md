@@ -9,7 +9,6 @@ A helper for SHU website.
 |Java-SE|1.8|
 |httpcomponents-cilent|4.5.2|
 |jsoup|1.10.2|
-|sqlite-jdbc|3.16.1|
 
 
 ## package
