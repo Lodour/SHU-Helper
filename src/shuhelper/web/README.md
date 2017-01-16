@@ -159,11 +159,6 @@ XK.setTerm(0);
 
 ```java
 ArrayList<String[]> courseTable = web.getCourseTableArrayList();
-for(String[] course : courseTable) {
-	for(String field : course)
-		System.out.print(field + " ");
-	System.out.println();
-}
 ```
 
 ### 选课排名
@@ -173,11 +168,6 @@ for(String[] course : courseTable) {
 
 ```java
 ArrayList<String[]> enrollRank = web.getEnrollRankArrayList();
-for(String[] course : enrollRank) {
-	for(String field : course)
-		System.out.print(field + " ");
-	System.out.println();
-}
 ```
 
 ### 查询课程
@@ -189,9 +179,4 @@ for(String[] course : enrollRank) {
 // 查询所有计算机学院的课
 // 时间可能会比较长
 ArrayList<String[]> allCourseQuery = web.getAllCourseArrayList("0830");
-for(String[] course : allCourseQuery) {
-	for(String field : course)
-		System.out.print(field + " ");
-	System.out.println();
-}
 ```
