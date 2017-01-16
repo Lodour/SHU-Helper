@@ -3,6 +3,15 @@
 
 A helper for SHU website.
 
+## dependence
+|Tool|Version|
+|:-:|:-:|
+|Java-SE|1.8|
+|httpcomponents-cilent|4.5.2|
+|jsoup|1.10.2|
+|sqlite-jdbc|3.16.1|
+
+
 ## package
 ### [shuhelper.web](https://github.com/Lodour/SHU-Helper/tree/master/src/shuhelper/web)
 > 实现相关网站的Java接口
