@@ -1,6 +1,12 @@
 # Document of shuhelper.web
 > 实现`http://xk.shu.edu.cn`和`http://cj.shu.eud.cn`的API。
 
+## 依赖
+|Tools|Version|
+|:-:|:-:|
+|httpcomponents-cilent|4.5.2|
+|jsoup|1.10.2|
+
 ## `WebAPI`抽象类
 > 基本的Web接口，实现了两个网站公用的功能，如获取验证码、登陆等。
 
