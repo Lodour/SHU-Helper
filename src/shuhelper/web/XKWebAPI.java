@@ -50,8 +50,9 @@ public class XKWebAPI extends WebAPI {
 	 */
 	public String[] getTermInfo() throws Exception {
 		String[] termInfo = new String[allPorts.length];
+		String urlLoginFormat = Utils.getProperty("XK_urlLoginFormat");
 		for (int i = 0; i < allPorts.length; i++) {
-			String url = urlLogin + ":" + allPorts[i];
+			String url = String.format(urlLoginFormat, allPorts[i]);
 			Document doc = Utils.getDocument(httpClient, url);
 			termInfo[i] = doc.select("div.log_maindiv > div:first-child").html();
 		}
