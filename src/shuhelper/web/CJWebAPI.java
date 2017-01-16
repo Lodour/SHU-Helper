@@ -89,43 +89,43 @@ public class CJWebAPI extends WebAPI {
 	}
 
 	/**
-	 * @Title: getScheduleArray
-	 * @Description: 以二维数组返回课程安排
+	 * @Title: getScheduleArrayList
+	 * @Description: 以ArrayList<String[]>返回课程安排
 	 * @param: @param strTermID
 	 * @param: @return
 	 * @param: @throws Exception
-	 * @return: String[][] {{课程号, 课程名, 教师号, 教师名, 上课时间, 上课地点, 答疑时间, 答疑地点}, ...}
+	 * @return: ArrayList<String[]> {{课程号, 课程名, 教师号, 教师名, 上课时间, 上课地点, 答疑时间, 答疑地点}, ...}
 	 */
-	public String[][] getScheduleArray(String strTermID) throws Exception {
+	public ArrayList<String[]> getScheduleArrayList(String strTermID) throws Exception {
 		Document doc = getScheduleDocument(strTermID);
 		String selectorRow = "tr:has(td:eq(7))";
 		String selectorCol = "td:lt(8)";
-		return Utils.parseTable2Array(doc, selectorRow, selectorCol);
+		return Utils.parseTable2ArrayList(doc, selectorRow, selectorCol);
 	}
 
 	/**
-	 * @Title: getScoreTermArray
-	 * @Description: 以二维数组返回学期成绩
+	 * @Title: getScoreTermArrayList
+	 * @Description: 以ArrayList<String[]>返回学期成绩
 	 * @param: @param strTermID
 	 * @param: @return
 	 * @param: @throws Exception
-	 * @return: String[][] {{课程号, 课程名, 学分, 成绩, 绩点}, ...}
+	 * @return: ArrayList<String[]> {{课程号, 课程名, 学分, 成绩, 绩点}, ...}
 	 */
-	public String[][] getScoreTermArray(String strTermID) throws Exception {
+	public ArrayList<String[]> getScoreTermArrayList(String strTermID) throws Exception {
 		Document doc = getScoreTermDocument(strTermID);
 		String selectorRow = "tr:has(td:eq(5))";
 		String selectorCol = "td:lt(6):gt(0)";
-		return Utils.parseTable2Array(doc, selectorRow, selectorCol);
+		return Utils.parseTable2ArrayList(doc, selectorRow, selectorCol);
 	}
 
 	/**
-	 * @Title: getScoreSummaryArray
-	 * @Description: 以二维数组返回成绩大表
+	 * @Title: getScoreSummaryArrayList
+	 * @Description: 以ArrayList<String[]>返回成绩大表
 	 * @param: @return
 	 * @param: @throws Exception
-	 * @return: String[][] {{课程号, 课程名, 学分, 成绩, 绩点, 学期}, ...}
+	 * @return: ArrayList<String[]> {{课程号, 课程名, 学分, 成绩, 绩点, 学期}, ...}
 	 */
-	public String[][] getScoreSummaryArray() throws Exception {
+	public ArrayList<String[]> getScoreSummaryArrayList() throws Exception {
 		Document doc = getScoreSummaryDocument();
 		int colCount = 6;
 		ArrayList<String[]> arrayList = new ArrayList<String[]>();
@@ -146,11 +146,6 @@ public class CJWebAPI extends WebAPI {
 				}
 			}
 		}
-		// convert to String[][]
-		String[][] array = new String[arrayList.size()][];
-		for (int i = 0; i < arrayList.size(); i++) {
-			array[i] = arrayList.get(i);
-		}
-		return array;
+		return arrayList;
 	}
 }

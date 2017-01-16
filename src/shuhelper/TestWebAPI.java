@@ -1,5 +1,7 @@
 package shuhelper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import shuhelper.web.CJWebAPI;
@@ -12,8 +14,8 @@ public class TestWebAPI {
 	
 	public static void main(String[] args) throws Exception {
 		CJWebAPI web = new CJWebAPI();
-//		testLogin(web);
-//		displayMatrix(web.getScoreSummaryArray());
+		testLogin(web);
+		displayList(web.getScoreSummaryArrayList());
 	}
 	
 	private static void testLogin(WebAPI webAPI) throws Exception {
@@ -27,26 +29,26 @@ public class TestWebAPI {
 	}
 	
 	/**
-	 * @Title: displayMatrix
-	 * @Description: 显示String二维数组mat
-	 * @param: @param mat
+	 * @Title: displayList
+	 * @Description: 显示List<String[]>
+	 * @param: @param list
 	 * @return: void
 	 */
 	@SuppressWarnings("unused")
-	private static void displayMatrix(String[][] mat) {
-		if (mat == null || mat.length == 0) {
+	private static void displayList(List<String[]> list) {
+		if (list == null || list.size() == 0) {
 			System.out.println("null/none");
 			return;
 		}
-		for (int i = 0; i < mat.length; i++) {
+		for (int i = 0; i < list.size(); i++) {
 			System.out.printf("[%d]", i);
-			String[] row = mat[i];
+			String[] row = list.get(i);
 			if (row == null || row.length == 0) {
 				System.out.println("null/none");
 				continue;
 			}
-			for (int j = 0; j < row.length; j++) {
-				System.out.print(" [" + row[j] + "]");
+			for (String item : row) {
+				System.out.print(" [" + item + "]");
 			}
 			System.out.println();
 		}

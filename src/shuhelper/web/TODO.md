@@ -26,8 +26,8 @@
 - [x] `public static Document postDocument(CloseableHttpClient client, String url, ArrayList<NameValuePair> data)`
 以`Jsoup.Document`返回`POST`某个页面的结果。
 
-- [x] `public static String[][] parseTable2Array(Document doc, String selectorRow, String selectorCol)`
-以`String[][]`返回`Document`中的表格先后按照`selectorRow`和`selectorCol`进行选择的结果。
+- [x] `public static ArrayList<String[]> parseTable2Array(Document doc, String selectorRow, String selectorCol)`
+以`ArrayList<String[]>`返回`Document`中的表格先后按照`selectorRow`和`selectorCol`进行选择的结果。
 
 - [x] `public String[] getLoginFields(Document doc)`
 从登录页面的文档中获取需提交的字段名。
@@ -76,14 +76,14 @@
 - [x] `private Document getScoreSummaryDocument()`
 返回成绩大表页面的文档。
 
-- [x] `public String[][] getScheduleArray(String strTermID)`
-返回`strTermID`学期课程安排页面的文档`String[][]`。
+- [x] `public ArrayList<String[]> getScheduleArrayList(String strTermID)`
+返回`strTermID`学期课程安排页面的文档`ArrayList<String[]>`。
 
-- [x] `public String[][] getScoreTermArray(String strTermID)`
-返回`strTermID`学期成绩页面的文档`String[][]`。
+- [x] `public ArrayList<String[]> getScoreTermArrayList(String strTermID)`
+返回`strTermID`学期成绩页面的文档`ArrayList<String[]>`。
 
-- [x] `public String[][] getScoreSummaryArray()`
-返回成绩大表页面的文档`String[][]`。
+- [x] `public ArrayList<String[]> getScoreSummaryArrayList()`
+返回成绩大表页面的文档`ArrayList<String[]>`。
 
 - [ ] `public void getSchedule(String strTermID)`
 将`strTermID`学期的课程安排存储在数据库中。
@@ -123,14 +123,14 @@
 - [x] `private Document getAllCourseDocument(String courseNo)`
 返回查询课程，且参数为`courseNo`时__所有结果__的文档。
 
-- [x] `public String[][] getCourseTableArray()`
-返回已选课程`String[][]`。
+- [x] `public ArrayList<String[]> getCourseTableArrayList()`
+返回已选课程`ArrayList<String[]>`。
 
-- [x] `public String[][] getEnrollRankArray()`
-返回选课排名`String[][]`。
+- [x] `public ArrayList<String[]> getEnrollRankArrayList()`
+返回选课排名`ArrayList<String[]>`。
 
-- [x] `public String[][] getAllCourseArray(String courseNo)`
-返回查询课程，且参数为`courseNo`时__所有结果__的文档`String[][]`。
+- [x] `public ArrayList<String[]> getAllCourseArrayList(String courseNo)`
+返回查询课程，且参数为`courseNo`时__所有结果__的文档`ArrayList<String[]>`。
 
 - [ ] `public void getCourseTable()`
 将已选课程存储在数据库中（会删除之前的记录）。

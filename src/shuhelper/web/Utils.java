@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
@@ -141,25 +143,26 @@ public class Utils {
 	}
 
 	/**
-	 * @Title: parseTable2Array
+	 * @Title: parseTable2ArrayList
 	 * @Description: Document中的表格转换为二维数组
 	 * @param: @param doc
 	 * @param: @param selectorRow
 	 * @param: @param selectorCol
 	 * @param: @return
-	 * @return: String[][]
+	 * @return: ArrayList<String[]>
 	 */
-	public static String[][] parseTable2Array(Document doc, String selectorRow, String selectorCol) {
+	public static ArrayList<String[]> parseTable2ArrayList(Document doc, String selectorRow, String selectorCol) {
 		Elements rows = doc.select(selectorRow);
-		String[][] array  = new String[rows.size()][];
-		for (int i = 0; i < rows.size(); i++) {
-			Elements cols = rows.get(i).select(selectorCol);
-			array[i] = new String[cols.size()];
-			for (int j = 0; j < cols.size(); j++) {
-				array[i][j] = cols.get(j).html();
+		ArrayList<String[]> arrayList = new ArrayList<String[]>();
+		for (Element row : rows) {
+			Elements cols = row.select(selectorCol);
+			String[] array = new String[cols.size()];
+			for (int i = 0; i < cols.size(); i++) {
+				array[i] = cols.get(i).html();
 			}
+			arrayList.add(array);
 		}
-		return array;
+		return arrayList;
 	}
 
 	public static String[] getLoginFields(Document doc) {

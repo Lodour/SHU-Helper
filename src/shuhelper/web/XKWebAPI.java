@@ -14,6 +14,7 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
@@ -127,49 +128,49 @@ public class XKWebAPI extends WebAPI {
 	}
 
 	/**
-	 * @Title: getCourseTableArray
+	 * @Title: getCourseTableArrayList
 	 * @Description: 返回已选课程
 	 * @param: @return
 	 * @param: @throws Exception
-	 * @return: String[][] 课程号, 课程名, 教师号, 教师名, 学分, 上课时间, 上课地点, 校区, 答疑时间, 答疑地点
+	 * @return: ArrayList<String[]> 课程号, 课程名, 教师号, 教师名, 学分, 上课时间, 上课地点, 校区, 答疑时间, 答疑地点
 	 */
-	public String[][] getCourseTableArray() throws Exception {
+	public ArrayList<String[]> getCourseTableArrayList() throws Exception {
 		Document doc = getCourseTableDocument();
 		String selectorRow = "tr:has(td:eq(10)):not(tr:has(td:gt(10)))";
 		String selectorCol = "td:gt(0)";
-		return Utils.parseTable2Array(doc, selectorRow, selectorCol);
+		return Utils.parseTable2ArrayList(doc, selectorRow, selectorCol);
 	}
 
 	/**
-	 * @Title: getEnrollRankArray
+	 * @Title: getEnrollRankArrayList
 	 * @Description: 返回选课排名
 	 * @param: @return
 	 * @param: @throws Exception
-	 * @return: String[][] 课程号, 课程名, 教师号, 教师名, 选课人数, 额定人数, 排名
+	 * @return: ArrayList<String[]> 课程号, 课程名, 教师号, 教师名, 选课人数, 额定人数, 排名
 	 */
-	public String[][] getEnrollRankArray() throws Exception {
+	public ArrayList<String[]> getEnrollRankArrayList() throws Exception {
 		Document doc = getEnrollRankDocument();
 		String selectorRow = "tr:has(td:eq(6)):not(tr:has(td:gt(6)))";
 		String selectorCol = "td";
-		return Utils.parseTable2Array(doc, selectorRow, selectorCol);
+		return Utils.parseTable2ArrayList(doc, selectorRow, selectorCol);
 	}
 
 	/**
-	 * @Title: getAllCourseArray
+	 * @Title: getAllCourseArrayList
 	 * @Description: 返回查询courseNo时的所有结果
 	 * @param: @param courseNo
 	 * @param: @return
 	 * @param: @throws Exception
-	 * @return: String[][] 课程号, 课程名, 学分, 教师号, 教师名, 上课时间, 上课地点, 容量, 人数, 校区, 选课限制, 答疑时间, 答疑地点
+	 * @return: ArrayList<String[]> 课程号, 课程名, 学分, 教师号, 教师名, 上课时间, 上课地点, 容量, 人数, 校区, 选课限制, 答疑时间, 答疑地点
 	 */
-	public String[][] getAllCourseArray(String courseNo) throws Exception {
+	public ArrayList<String[]> getAllCourseArray(String courseNo) throws Exception {
 		Document doc = getAllCourseDocument(courseNo);
 		// 选择所有有效行（至少存在10列）
 		Elements rows = doc.select("tr:has(td:eq(9))");
-		String[][] array = new String[rows.size()][13];
+		ArrayList<String[]> arrayList = new ArrayList<String[]>();
 		String[] courseHeadInfo = new String[3];
-		for (int i = 0; i < rows.size(); i++) {
-			Elements cols = rows.get(i).select("td");
+		for (Element row : rows) {
+			Elements cols = row.select("td");
 			// 如果该行有13列，则认为包含课程信息头（课程号 课程名 学分），并记录
 			if (cols.size() == 13) {
 				for (int j = 0; j < 3; j++) {
@@ -177,7 +178,7 @@ public class XKWebAPI extends WebAPI {
 				}
 			}
 			// 记录该条信息
-			String[] info = array[i];
+			String[] info = new String[13];
 			int k = 0;
 			for (k = 0; k < 3; k++) {
 				info[k] = courseHeadInfo[k];
@@ -185,7 +186,8 @@ public class XKWebAPI extends WebAPI {
 			for (int j = cols.size() - 10; j < cols.size(); j++) {
 				info[k++] = cols.get(j).html();
 			}
+			arrayList.add(info);
 		}
-		return array;
+		return arrayList;
 	}
 }
