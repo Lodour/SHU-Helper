@@ -13,7 +13,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -58,7 +57,7 @@ public abstract class WebAPI {
 	 * @Fields strUserNo : 学号
 	 */
 	protected String strUserNo;
-	
+
 	/**
 	 * <p>Title: WebAPI</p>
 	 * <p>Description: 构造函数</p>
@@ -75,7 +74,7 @@ public abstract class WebAPI {
 	 * @return: String
 	 */
 	public String getCaptcha() throws IOException {
-		String fileName = "Captcha.jpg";
+		String fileName = Utils.getProperty("CaptchaFileName");
 		String filePath = null;
 		HttpGet getCaptcha = new HttpGet(urlCaptcha);
 		CloseableHttpResponse response = httpClient.execute(getCaptcha);

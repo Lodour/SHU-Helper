@@ -8,13 +8,12 @@
  */
 package shuhelper.web;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
@@ -29,22 +28,18 @@ public class XKWebAPI extends WebAPI {
 	 * @Fields port : 端口号，默认为80
 	 */
 	private int port = 80;
-	
+
 	/**
 	 * @Fields allPorts : 所有可选的端口号
 	 */
 	private int[] allPorts = {80, 8080};
-	
-	/**
-	 * @Fields urlBasic : urlLogin的格式
-	 */
-	private String urlLoginFormat = "http://xk.autoisp.shu.edu.cn:%d";
-	
-	public XKWebAPI() {
+
+
+	public XKWebAPI() throws IOException {
 		super();
 		setTerm(0);
 	}
-	
+
 	/**
 	 * @Title: getTermInfo
 	 * @Description: 获取可选端口中开放学期的信息
@@ -61,20 +56,22 @@ public class XKWebAPI extends WebAPI {
 		}
 		return termInfo;
 	}
-	
+
 	/**
 	 * @Title: setTerm
 	 * @Description: 设置学期为allPorts[idx]，并更新相关URL
 	 * @param: @param idx
 	 * @return: void
+	 * @throws IOException
 	 */
-	public void setTerm(int idx) {
+	public void setTerm(int idx) throws IOException {
 		port = allPorts[idx];
+		urlLoginFormat = Utils.getProperty("XK_urlLoginFormat");
 		urlLogin = String.format(urlLoginFormat, port);
-		urlIndex = urlLogin + "/Home/StudentIndex";
-		urlCaptcha = urlLogin + "/Login/GetValidateCode?%20%20+%20GetTimestamp()";
+		urlIndex = urlLogin + Utils.getProperty("XK_urlIndexSuffix");
+		urlCaptcha = urlLogin + Utils.getProperty("XK_urlCaptchaSuffix");
 	}
-	
+
 	/**
 	 * @Title: getCourseTableDocument
 	 * @Description: 返回课表查询页面的文档
@@ -83,10 +80,10 @@ public class XKWebAPI extends WebAPI {
 	 * @return: Document
 	 */
 	private Document getCourseTableDocument() throws Exception {
-		String url = urlLogin + "/StudentQuery/CtrlViewQueryCourseTable";
+		String url = urlLogin + Utils.getProperty("XK_urlCourseTableSuffix");
 		return Utils.getDocument(httpClient, url);
 	}
-	
+
 	/**
 	 * @Title: getEnrollRankDocument
 	 * @Description: 返回选课排名页面的文档
@@ -95,10 +92,10 @@ public class XKWebAPI extends WebAPI {
 	 * @return: Document
 	 */
 	private Document getEnrollRankDocument() throws Exception {
-		String url = urlLogin + "/DataQuery/CtrlQueryEnrollRank";
+		String url = urlLogin + Utils.getProperty("XK_urlEnrollRankSuffix");
 		return Utils.getDocument(httpClient, url);
 	}
-	
+
 	/**
 	 * @Title: getAllCourseDocument
 	 * @Description: 返回查询courseNo所有结果的页面文档
@@ -108,7 +105,7 @@ public class XKWebAPI extends WebAPI {
 	 * @return: Document
 	 */
 	private Document getAllCourseDocument(String courseNo) throws Exception {
-		String url = urlLogin + "/StudentQuery/CtrlViewQueryCourse";
+		String url = urlLogin + Utils.getProperty("XK_urlAllCourseSuffix");
 		List<NameValuePair> data = new ArrayList<NameValuePair>();
 		data.add(new BasicNameValuePair("CourseNo", courseNo));
 		data.add(new BasicNameValuePair("CourseName", ""));
@@ -127,7 +124,7 @@ public class XKWebAPI extends WebAPI {
 		data.add(new BasicNameValuePair("FunctionString", "InitPage"));
 		return Utils.postDocument(httpClient, url, data);
 	}
-	
+
 	/**
 	 * @Title: getCourseTableArray
 	 * @Description: 返回已选课程
@@ -141,7 +138,7 @@ public class XKWebAPI extends WebAPI {
 		String selectorCol = "td:gt(0)";
 		return Utils.parseTable2Array(doc, selectorRow, selectorCol);
 	}
-	
+
 	/**
 	 * @Title: getEnrollRankArray
 	 * @Description: 返回选课排名
@@ -155,7 +152,7 @@ public class XKWebAPI extends WebAPI {
 		String selectorCol = "td";
 		return Utils.parseTable2Array(doc, selectorRow, selectorCol);
 	}
-	
+
 	/**
 	 * @Title: getAllCourseArray
 	 * @Description: 返回查询courseNo时的所有结果
@@ -174,17 +171,17 @@ public class XKWebAPI extends WebAPI {
 			Elements cols = rows.get(i).select("td");
 			// 如果该行有13列，则认为包含课程信息头（课程号 课程名 学分），并记录
 			if (cols.size() == 13) {
-				for(int j = 0; j < 3; j++) {
+				for (int j = 0; j < 3; j++) {
 					courseHeadInfo[j] = cols.get(j).html();
 				}
 			}
 			// 记录该条信息
 			String[] info = array[i];
 			int k = 0;
-			for(k = 0; k < 3; k++) {
+			for (k = 0; k < 3; k++) {
 				info[k] = courseHeadInfo[k];
 			}
-			for(int j = cols.size() - 10; j < cols.size(); j++) {
+			for (int j = cols.size() - 10; j < cols.size(); j++) {
 				info[k++] = cols.get(j).html();
 			}
 		}

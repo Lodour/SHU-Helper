@@ -1,6 +1,5 @@
 package shuhelper;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 import shuhelper.web.CJWebAPI;
@@ -11,10 +10,9 @@ public class TestWebAPI {
 	private static Scanner in = new Scanner(System.in);
 	
 	public static void main(String[] args) throws Exception {
-		XKWebAPI web = new XKWebAPI();
+		CJWebAPI web = new CJWebAPI();
 		testLogin(web);
-		String[][] a = web.getAllCourseArray("R");
-		displayMatrix(a);
+		displayMatrix(web.getScoreSummaryArray());
 	}
 	
 	private static void testLogin(WebAPI webAPI) throws Exception {

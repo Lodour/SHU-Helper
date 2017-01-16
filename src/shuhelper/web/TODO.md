@@ -5,6 +5,10 @@
 ## Utils
 
 > 工具类
+### 成员变量
+|变量名|修饰符|类型|功能|
+|:--------:|:------------:|:-----------------:|:--------:|
+|properties|private static|Map<String, String>|属性文件缓存|
 
 ### 成员方法
 - [x] `public static Document parseFile(String filePath)`
@@ -28,6 +32,8 @@
 - [x] `public String[] getLoginFields(Document doc)`
 从登录页面的文档中获取需提交的字段名。
 
+- [x] `public static String getProperty(String key)`
+获取当前类目录下属性文件中，键`key`的值。
 
 ## WebAPI
 
@@ -98,7 +104,8 @@
 |:------------:|:-----:|:----:|:-------------------:|
 |port          |private|int   |网页端口               |
 |allPorts      |private|int[] |所有可选的端口号        |
-|urlLoginFormat|private|String|登录页面的URL带端口的格式|
+
+- [ ] 考虑`port`和`allPorts`也从属性文件中读取
 
 ### 成员方法
 - [x] `public String[] getTermInfo()`

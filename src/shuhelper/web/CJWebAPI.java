@@ -30,12 +30,13 @@ public class CJWebAPI extends WebAPI {
 	/**
 	 * <p>Title: CJWebAPI</p>
 	 * <p>Description: 构造函数</p>
+	 * @throws IOException
 	 */
-	public CJWebAPI() {
+	public CJWebAPI() throws IOException {
 		super();
-		urlLogin = "http://cj.shu.edu.cn/";
-		urlIndex = "http://cj.shu.edu.cn/Home/StudentIndex";
-		urlCaptcha = "http://cj.shu.edu.cn/User/GetValidateCode?%20%20+%20GetTimestamp()";
+		urlLogin = Utils.getProperty("CJ_urlLogin");
+		urlIndex = urlLogin + Utils.getProperty("CJ_urlIndexSuffix");
+		urlCaptcha = urlLogin + Utils.getProperty("CJ_urlCaptchaSuffix");
 	}
 
 	/**
@@ -50,7 +51,7 @@ public class CJWebAPI extends WebAPI {
 	 */
 	private Document getScheduleDocument(String strTermID)
 	throws ParseException, IOException {
-		String urlGetSchedule = "http://cj.shu.edu.cn/StudentPortal/CtrlStudentSchedule";
+		String urlGetSchedule = urlLogin + Utils.getProperty("CJ_urlGetScheduleSuffix");
 		List<NameValuePair> postData = new ArrayList<NameValuePair>();
 		postData.add(new BasicNameValuePair("academicTermID", strTermID));
 		return Utils.postDocument(httpClient, urlGetSchedule, postData);
@@ -66,7 +67,7 @@ public class CJWebAPI extends WebAPI {
 	 */
 	private Document getScoreTermDocument(String strTermID)
 	throws IOException {
-		String urlGetTermScore = "http://cj.shu.edu.cn/StudentPortal/CtrlScoreQuery";
+		String urlGetTermScore = urlLogin + Utils.getProperty("CJ_urlGetTermScoreSuffix");
 		List<NameValuePair> postData = new ArrayList<NameValuePair>();
 		postData.add(new BasicNameValuePair("academicTermID", strTermID));
 		return Utils.postDocument(httpClient, urlGetTermScore, postData);
@@ -82,7 +83,7 @@ public class CJWebAPI extends WebAPI {
 	 */
 	private Document getScoreSummaryDocument()
 	throws ParseException, IOException {
-		String urlGetScoreSummary = "http://cj.shu.edu.cn/StudentPortal/ScoreSummary";
+		String urlGetScoreSummary = urlLogin + Utils.getProperty("CJ_urlGetScoreSummarySuffix");
 		return Utils.getDocument(httpClient, urlGetScoreSummary);
 	}
 
@@ -100,7 +101,7 @@ public class CJWebAPI extends WebAPI {
 		String selectorCol = "td:lt(8)";
 		return Utils.parseTable2Array(doc, selectorRow, selectorCol);
 	}
-	
+
 	/**
 	 * @Title: getScoreTermArray
 	 * @Description: 以二维数组返回学期成绩
@@ -115,7 +116,7 @@ public class CJWebAPI extends WebAPI {
 		String selectorCol = "td:lt(6):gt(0)";
 		return Utils.parseTable2Array(doc, selectorRow, selectorCol);
 	}
-	
+
 	/**
 	 * @Title: getScoreSummaryArray
 	 * @Description: 以二维数组返回成绩大表
@@ -128,7 +129,7 @@ public class CJWebAPI extends WebAPI {
 		int colCount = 6;
 		ArrayList<String[]> arrayList = new ArrayList<String[]>();
 		// select rows
-		Elements rows = doc.select("tr:has(td:eq(11)):not(tr:has(td:gt(11)))");		
+		Elements rows = doc.select("tr:has(td:eq(11)):not(tr:has(td:gt(11)))");
 		for (Element row : rows) {
 			// select cols twice
 			Elements cols = null;

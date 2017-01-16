@@ -10,7 +10,11 @@ package shuhelper.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
@@ -33,6 +37,11 @@ import org.jsoup.select.Elements;
  *
  */
 public class Utils {
+	/**
+	 * @Fields properties : 属性文件缓存
+	 */
+	private static Map<String, String> properties = null;
+
 	/**
 	 * @Title: parseFile
 	 * @Description: 从文件中加载HTML文档
@@ -149,7 +158,7 @@ public class Utils {
 		}
 		return array;
 	}
-	
+
 	public static String[] getLoginFields(Document doc) {
 		String[] fields = new String[3];
 		Elements eleInputFields = doc.select("input[id~=^txt\\w+]");
@@ -157,5 +166,17 @@ public class Utils {
 			fields[i] = eleInputFields.get(i).attr("id");
 		}
 		return fields;
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static String getProperty(String key) throws IOException {
+		if (properties == null) {
+			InputStream is = Utils.class.getResourceAsStream("web.properties");
+			Properties prop = new Properties();
+			prop.load(is);
+			properties =  new HashMap<String, String>((Map) prop);
+			is.close();
+		}
+		return properties.get(key);
 	}
 }
