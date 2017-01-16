@@ -1,4 +1,4 @@
-# shuhelper.web Manaual
+# Document of shuhelper.web
 > 实现`http://xk.shu.edu.cn`和`http://cj.shu.eud.cn`的API。
 
 ## `WebAPI`抽象类
@@ -74,9 +74,9 @@ boolean state = web.isLogin();
 > 继承自`WebAPI`，实现`http://cj.shu.eud.cn`的网络接口。
 
 ### 课程安排
-`String[][] getScheduleArray(String strTermID)`
+`ArrayList<String[]> getScheduleArrayList(String strTermID)`
 
-该方法返回String型二维数组的引用，表示这个学期的课程安排，每行一门课。
+该方法返回`String[]`列表的引用，表示这个学期的课程安排，每项一门课。
 
 > 课程号, 课程名, 教师号, 教师名, 上课时间, 上课地点, 答疑时间, 答疑地点
 
@@ -92,13 +92,13 @@ boolean state = web.isLogin();
 
 ```java
 String strTermID = "20161";
-String[][] arraySchedule = CJ.getScheduleArray(strTermID);
+ArrayList<String[]> schedule = CJ.getScheduleArrayList(strTermID);
 ```
 
 ### 学期成绩
-`String[][] getScoreTermArray(String strTermID)`
+`ArrayList<String[]> getScoreTermArrayList(String strTermID)`
 
-该方法返回String型二维数组的引用，表示这个学期的成绩情况，每行一门课。
+该方法返回`String[]`列表的引用，表示这个学期的成绩情况，每项一门课。
 
 > 课程号, 课程名, 学分, 成绩, 绩点
 
@@ -106,18 +106,18 @@ String[][] arraySchedule = CJ.getScheduleArray(strTermID);
 
 ```java
 String strTermID = "20161";
-String[][] arrayScoreTerm = CJ.getScoreTermArray(strTermID);
+ArrayList<String[]> scoreTerm = CJ.getScoreTermArrayList(strTermID);
 ```
 
 ### 成绩大表
-`String[][] getScoreSummaryArray()`
+`ArrayList<String[]> getScoreSummaryArrayList()`
 
-该方法返回String型二维数组的引用，表示成绩大表的情况，每行一门课。
+该方法返回`String[]`列表的引用，表示成绩大表的情况，每项一门课。
 
 > 课程号, 课程名, 学分, 成绩, 绩点, 学期
 
 ```java
-String[][] arrayScoreSummary = CJ.getScoreSummaryArray();
+ArrayList<String[]> scoreSummary = CJ.getScoreSummaryArrayList();
 ```
 
 
@@ -131,7 +131,7 @@ String[][] arrayScoreSummary = CJ.getScoreSummaryArray();
 >
 > http://xk.autoisp.shu.eud.cn:8080
 
-`String[] getTermInfo()`方法返回String数组的引用，显示当前可选学期的信息。
+`String[] getTermInfo()`方法返回`String`数组的引用，显示当前可选学期的信息。
 
 `void setTerm(int idx)`则指定使用数组中第`idx`个学期。
 
@@ -147,12 +147,12 @@ XK.setTerm(0);
 ```
 
 ### 已选课程
-`String[][] getCourseTableArray()`方法返回二维String数组的引用，显示已选课程，每行一门课。
+`ArrayList<String[]> getCourseTableArrayList()`方法返回`String[]`列表的引用，显示已选课程，每项一门课。
 
 > 课程号, 课程名, 教师号, 教师名, 学分, 上课时间, 上课地点, 校区, 答疑时间, 答疑地点
 
 ```java
-String[][] courseTable = web.getCourseTableArray();
+ArrayList<String[]> courseTable = web.getCourseTableArrayList();
 for(String[] course : courseTable) {
 	for(String field : course)
 		System.out.print(field + " ");
@@ -161,12 +161,12 @@ for(String[] course : courseTable) {
 ```
 
 ### 选课排名
-`String[][] getEnrollRankArray()`方法返回二维String数组的引用，显示选课排名，每行一门课。
+`ArrayList<String[]> getEnrollRankArrayList()`方法返回`String[]`列表的引用，显示选课排名，每项一门课。
 
 > 课程号, 课程名, 教师号, 教师名, 选课人数, 额定人数, 排名
 
 ```java
-String[][] enrollRank = web.getEnrollRankArray();
+ArrayList<String[]> enrollRank = web.getEnrollRankArrayList();
 for(String[] course : enrollRank) {
 	for(String field : course)
 		System.out.print(field + " ");
@@ -175,14 +175,14 @@ for(String[] course : enrollRank) {
 ```
 
 ### 查询课程
-`String[][] getAllCourseArray(String courseNo)`方法返回二维String数组的引用，显示所有查询结果，每行一节课。
+`ArrayList<String[]> getAllCourseArrayList(String courseNo)`方法返回`String[]`列表的引用，显示所有查询结果，每项一节课。
 
 > 课程号, 课程名, 学分, 教师号, 教师名, 上课时间, 上课地点, 容量, 人数, 校区, 选课限制, 答疑时间, 答疑地点
 
 ```java
 // 查询所有计算机学院的课
 // 时间可能会比较长
-String[][] allCourseQuery = web.getAllCourseArray("0830");
+ArrayList<String[]> allCourseQuery = web.getAllCourseArrayList("0830");
 for(String[] course : allCourseQuery) {
 	for(String field : course)
 		System.out.print(field + " ");
