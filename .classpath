@@ -2,9 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="src/shuhelper/web/lib/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="src/shuhelper/web/lib/httpclient-4.5.2.jar"/>
-	<classpathentry kind="lib" path="src/shuhelper/web/lib/httpcore-4.4.4.jar"/>
-	<classpathentry kind="lib" path="src/shuhelper/web/lib/jsoup-1.10.2.jar"/>
+	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
