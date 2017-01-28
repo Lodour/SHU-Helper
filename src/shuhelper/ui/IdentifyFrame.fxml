@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<TabPane fx:id="ChosePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="shuhelper.ui.IdentifyFrame">
+  <tabs>
+    <Tab fx:id="TabCJ" text="教务处管理系统">
+         <content>
+            <Pane fx:id="CJ_IdentifyPane" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="57.0" layoutY="162.0" prefHeight="23.0" prefWidth="120.0" text="请输入验证码：">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="Cj_Image" fitHeight="41.0" fitWidth="124.0" layoutX="397.0" layoutY="153.0" onMouseClicked="#CJ_ChangeImage" pickOnBounds="true" preserveRatio="true" />
+                  <TextField fx:id="CJ_Text" layoutX="187.0" layoutY="161.0" prefHeight="26.0" prefWidth="195.0" />
+                  <Label fx:id="CJ_Change" layoutX="405.0" layoutY="203.0" onMouseClicked="#CJ_ChangeImage" text="点击图片，更换验证码" textFill="#5488e1" />
+                  <Button fx:id="CJ_Button" layoutX="247.0" layoutY="199.0" mnemonicParsing="false" onAction="#CJ_ButtonAction" prefHeight="25.0" prefWidth="70.0" text="确定">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+         </content></Tab>
+    <Tab fx:id="TabXK" text="选课系统">
+         <content>
+            <Pane fx:id="XK_IdentifyPane" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="57.0" layoutY="162.0" prefHeight="23.0" prefWidth="120.0" text="请输入验证码：">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="XK_Image" fitHeight="41.0" fitWidth="124.0" layoutX="397.0" layoutY="153.0" onMouseClicked="#XK_ChangeImage" pickOnBounds="true" preserveRatio="true" />
+                  <TextField fx:id="XK_Text" layoutX="187.0" layoutY="161.0" prefHeight="26.0" prefWidth="195.0" />
+                  <Label fx:id="XK_Change" layoutX="405.0" layoutY="203.0" onMouseClicked="#XK_ChangeImage" text="点击图片，更换验证码" textFill="#5488e1" />
+                  <Button fx:id="XK_Button" layoutX="247.0" layoutY="199.0" mnemonicParsing="false" onAction="#XK_ButtonAction" prefHeight="25.0" prefWidth="70.0" text="确定">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+         </content></Tab>
+  </tabs>
+</TabPane>
