@@ -8,7 +8,6 @@ import javafx.scene.image.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;   
@@ -22,7 +21,8 @@ import javafx.stage.StageStyle;
 
 public class LoginFrame {
 	//’À∫≈√‹¬Î ˝æ›
-	private String username,password;
+	public static String username;
+	public static String password;
 	//’À∫≈√‹¬ÎŒƒ±æøÚ
 	@FXML
 	private TextField UsernameText;
@@ -48,12 +48,11 @@ public class LoginFrame {
 	private void LoginButtonEvent(ActionEvent e) throws Exception
 	{
 		GetText();
-		System.out.println(username);
-		System.out.println(password);
 		LoginButton.getScene().getWindow().hide();
-		WindowFrame Identify = new WindowFrame("IdentifyFrame");
+		WindowFrame Identify = new WindowFrame("IdentifyFrame",600,400);
 		Identify.Start();
 		Identify.SetTitle("SHU-Helper");
+		Identify.Show();
 	}
 	@FXML
 	private void ResetButtonEvent(ActionEvent e)

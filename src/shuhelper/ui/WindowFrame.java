@@ -9,26 +9,35 @@ import javafx.stage.StageStyle;
 public class WindowFrame {
 	String FrameName;
 	Stage stage;
-	WindowFrame(String a)
+	private double height,weight;
+	
+	WindowFrame(String a,double h,double w)
 	{
 		FrameName = a + ".fxml";
 		stage = new Stage();
+		height = h;
+		weight = w;
 	}
 	public void Start() throws Exception
 	{
 		Parent root = FXMLLoader.load(getClass().getResource(FrameName));
-		Scene scene = new Scene(root,600,400);
+		Scene scene = new Scene(root,height,weight);
 		stage.initStyle(StageStyle.DECORATED);
 		stage.setScene(scene);
-        stage.show();
 	}
 	public void SetTitle(String name)
 	{
 		 stage.setTitle(name);
 	}
+	public void Show()
+	{
+		stage.show();
+	}
+	
 	public void Close()
 	{
 		stage.close();
 	}
+
 
 }
