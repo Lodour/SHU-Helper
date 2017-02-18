@@ -120,3 +120,15 @@
 
 - [x] `public ArrayList<String[]> getAllCourseArrayList(String courseNo)`
 返回查询课程，且参数为`courseNo`时__所有结果__的文档`ArrayList<String[]>`。
+
+- [x] `public String getEnrollStatus()`
+返回选课系统的状态。
+
+- [x] `private String doEnrollOrReturnCourse(String propertyKey, List<NameValuePair> data, String selector)`
+执行选课或退课。
+
+- [x] `public String enrollCourse(String courseNo, String teacherNo)`
+根据课程号、教师号进行选课，并返回结果。
+
+- [x] `public String returnCourse(String courseNo, String teacherNo)`
+根据课程号、教师号进行退课，并返回结果。
