@@ -1,6 +1,6 @@
 # Released JAR Files
 
-## SHU-WebAPI-*.*
+## SHU-WebAPI-\*.\*
 
 * 下载`SHU-WebAPI-*.*.jar`以及[这个目录](https://github.com/Lodour/SHU-Helper/tree/master/src/shuhelper/web/lib)内的所有jar文件
 
