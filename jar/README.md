@@ -1,12 +1,12 @@
 # Released JAR Files
 
-## SHU-WebAPI-1.0
+## SHU-WebAPI-*.*
 
-* 下载`SHU-WebAPI-1.0.jar`以及[这个目录](https://github.com/Lodour/SHU-Helper/tree/master/src/shuhelper/web/lib)内的所有jar文件
+* 下载`SHU-WebAPI-*.*.jar`以及[这个目录](https://github.com/Lodour/SHU-Helper/tree/master/src/shuhelper/web/lib)内的所有jar文件
 
-* 保存到项目中`lib`文件夹内（没有则手动新建）。
+* 保存到项目中与`src`文件夹同级目录的`lib`文件夹内（没有则手动新建）。
 
-* 将以上文件全部添加到`Build Path`中。
+* 将`lib`文件夹内文件全部添加到`Build Path`中。
 
 * 只需`import shuhelper.web.*`即可。
 
