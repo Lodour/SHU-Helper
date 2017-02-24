@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="300.0" style="-fx-background-color: rgba(0,0,0,0.8);" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="shuhelper.ui.PromtFrame">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.80001831054688" minWidth="10.0" percentWidth="25.0" prefWidth="121.80001831054688" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="329.1999816894531" minWidth="10.0" percentWidth="75.0" prefWidth="316.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="329.1999816894531" minWidth="10.0" percentWidth="5.0" prefWidth="316.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" percentHeight="12.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="128.5999755859375" minHeight="10.0" percentHeight="76.0" prefHeight="69.80001831054688" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="159.80001831054688" minHeight="6.399993896484375" percentHeight="12.0" prefHeight="9.199981689453125" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Label alignment="CENTER" prefHeight="37.0" prefWidth="226.0" text="账号或密码错误，请重新输入" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="63.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+         <image>
+            <Image url="@timg.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Sure" fitHeight="27.0" fitWidth="133.0" onMouseClicked="#ButtonAction" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+         <image>
+            <Image url="@error.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</GridPane>

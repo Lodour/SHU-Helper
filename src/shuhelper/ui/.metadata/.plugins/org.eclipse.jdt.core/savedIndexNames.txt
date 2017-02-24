@@ -1,0 +1,2 @@
+INDEX VERSION 1.129+E:\Java Workspace\SHUHELP\SHU-Helper\.metadata\.plugins\org.eclipse.jdt.core
+1182634606.index

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="347.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="shuhelper.ui.LoginFrame">
+   <children>
+      <ImageView fitHeight="357.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Captcha3.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="LoginButton" layoutX="144.0" layoutY="256.0" mnemonicParsing="false" onAction="#LoginButtonEvent" prefHeight="30.0" prefWidth="243.0" style="-fx-background-color: rgba(97,149,189,0.6);" text="Sign In" textFill="WHITE" />
+      <Button fx:id="ResetButton" layoutX="316.0" layoutY="302.0" mnemonicParsing="false" onAction="#ResetButtonEvent" prefHeight="23.0" prefWidth="70.0" style="-fx-background-color: rgba(97,149,189,0.6);" text="Reverse" textFill="WHITE" />
+      <PasswordField fx:id="PasswordText" alignment="CENTER" layoutX="144.0" layoutY="206.0" prefHeight="30.0" prefWidth="243.0" promptText="Password" />
+      <TextField fx:id="UsernameText" alignment="CENTER" layoutX="144.0" layoutY="159.0" prefHeight="30.0" prefWidth="243.0" promptText="Student ID" />
+      <ImageView fx:id="Logo" fitHeight="65.0" fitWidth="70.0" layoutX="233.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@shu.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="144.0" layoutY="306.0" prefHeight="14.0" prefWidth="172.0" text="上海大学计算机学院" textFill="WHITE" />
+      <Label layoutX="271.0" layoutY="14.0" text="By Roll Pealing SigleYuan HighJ Deniece" textFill="WHITE" />
+   </children>
+</Pane>
