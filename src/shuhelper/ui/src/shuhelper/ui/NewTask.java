@@ -4,5 +4,5 @@ import javafx.concurrent.Task;
 
 public abstract class NewTask extends Task<Object>{
 
-	abstract public String GetPath();
+	abstract public Object GetPath();
 }

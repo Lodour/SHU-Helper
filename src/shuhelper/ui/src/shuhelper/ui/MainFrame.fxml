@@ -1,33 +1,309 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<TabPane fx:id="ChosePane" blendMode="RED" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="shuhelper.ui.MainFrame">
+<TabPane fx:id="ChosePane" blendMode="RED" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="481.0" prefWidth="687.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="shuhelper.ui.MainFrame">
   <tabs>
-      <Tab text="欢迎使用SHU-Helper">
+      <Tab onSelectionChanged="#Tabaction" text="欢迎使用SHU-Helper">
          <content>
             <GridPane style="-fx-background-image: url(logo.jpg);">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
          </content>
       </Tab>
-    <Tab fx:id="XK_IdentTab" closable="false" onSelectionChanged="#XK_Tabaction" text="上海大学选课系统">
+      <Tab fx:id="XK_IdentTab" onSelectionChanged="#XK_Tabaction" text="上海大学选课系统">
          <content>
-            <SplitPane prefHeight="200.0" prefWidth="200.0" />
-         </content></Tab>
-    <Tab fx:id="CJ_IdentTab" closable="false" text="教务处管理系统">
+            <GridPane prefHeight="387.0" prefWidth="619.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="125.80001831054688" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="568.8000183105469" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="5.20001220703125" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="417.79998779296875" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: rgba(50,50,50);" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                     <children>
+                        <Button fx:id="Wait_Button" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#Wait_Buttonaction" prefHeight="41.0" prefWidth="109.0" style="-fx-border-color: rgba(50,50,50);" text="待选课程/课表" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="Search_Button" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#Search_Buttonaction" prefHeight="43.0" prefWidth="109.0" style="-fx-border-color: rgba(50,50,50);" text="搜索课程/选课" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="Had_Button" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#Had_Buttonaction" prefHeight="45.0" prefWidth="122.0" style="-fx-border-color: rgba(50,50,50);" text="已选课程/排名" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <GridPane fx:id="Wait_Pane" cacheShape="false" disable="true" gridLinesVisible="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="282.4000244140625" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="241.5999755859375" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="101.60000610351562" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="315.3999938964844" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TableView fx:id="WaitTable" prefHeight="333.0" prefWidth="301.0" GridPane.rowIndex="1">
+                          <columns>
+                            <TableColumn fx:id="Wait_ClassNum" prefWidth="41.20001220703125" text="课程号" />
+                            <TableColumn fx:id="Wait_ClassName" prefWidth="48.79998779296875" text="课程名" />
+                              <TableColumn fx:id="Wait_Score" prefWidth="35.79998779296875" text="学分" />
+                              <TableColumn fx:id="Wait_TeacherName" prefWidth="41.39996337890625" text="教师名" />
+                              <TableColumn fx:id="Wait_Time" prefWidth="57.800048828125" text="上课时间" />
+                              <TableColumn fx:id="Wait_PeopleNum" prefWidth="39.20001220703125" text="人数" />
+                              <TableColumn fx:id="Wait_Choice" prefWidth="54.79998779296875" text="选课" />
+                          </columns>
+                        </TableView>
+                        <GridPane fx:id="XK_ClassTable1" style="-fx-border-width: 3;" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label alignment="CENTER" prefHeight="37.0" prefWidth="64.0" text="星期一" GridPane.columnIndex="1" />
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="61.0" text="星期二" GridPane.columnIndex="2" />
+                              <Label alignment="CENTER" prefHeight="42.0" prefWidth="63.0" text="星期三" GridPane.columnIndex="3" />
+                              <Label alignment="CENTER" prefHeight="59.0" prefWidth="73.0" text="星期四" GridPane.columnIndex="4" />
+                              <Label alignment="CENTER" prefHeight="57.0" prefWidth="85.0" text="星期五" GridPane.columnIndex="5" />
+                              <Label alignment="CENTER" prefHeight="62.0" prefWidth="87.0" text="1" GridPane.rowIndex="1" />
+                              <Label alignment="CENTER" prefHeight="44.0" prefWidth="63.0" text="2" GridPane.rowIndex="2" />
+                              <Label alignment="CENTER" prefHeight="37.0" prefWidth="55.0" text="3" GridPane.rowIndex="3" />
+                              <Label alignment="CENTER" prefHeight="39.0" prefWidth="64.0" text="4" GridPane.rowIndex="4" />
+                              <Label alignment="CENTER" prefHeight="54.0" prefWidth="73.0" text="5" GridPane.rowIndex="5" />
+                              <Label alignment="CENTER" prefHeight="50.0" prefWidth="88.0" text="6" GridPane.rowIndex="6" />
+                              <Label alignment="CENTER" prefHeight="39.0" prefWidth="61.0" text="7" GridPane.rowIndex="7" />
+                              <Label alignment="CENTER" prefHeight="65.0" prefWidth="82.0" text="8" GridPane.rowIndex="8" />
+                              <Label alignment="CENTER" prefHeight="56.0" prefWidth="75.0" text="9" GridPane.rowIndex="9" />
+                              <Label alignment="CENTER" prefHeight="59.0" prefWidth="70.0" text="10" GridPane.rowIndex="10" />
+                              <Label alignment="CENTER" prefHeight="46.0" prefWidth="58.0" text="11" GridPane.rowIndex="11" />
+                              <Label alignment="CENTER" prefHeight="67.0" prefWidth="89.0" text="12" GridPane.rowIndex="12" />
+                              <Label alignment="CENTER" prefHeight="42.0" prefWidth="75.0" text="13" GridPane.rowIndex="13" />
+                              <Label fx:id="label11" alignment="CENTER" prefHeight="51.0" prefWidth="67.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="label21" alignment="CENTER" prefHeight="67.0" prefWidth="77.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <Label fx:id="label31" alignment="CENTER" prefHeight="43.0" prefWidth="68.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <Label fx:id="label41" alignment="CENTER" prefHeight="64.0" prefWidth="94.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                              <Label fx:id="label51" alignment="CENTER" prefHeight="70.0" prefWidth="81.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                              <Label fx:id="label12" alignment="CENTER" prefHeight="45.0" prefWidth="70.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label fx:id="label22" alignment="CENTER" prefHeight="57.0" prefWidth="88.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <Label fx:id="label23" alignment="CENTER" prefHeight="61.0" prefWidth="83.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                              <Label fx:id="label24" alignment="CENTER" prefHeight="81.0" prefWidth="99.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                              <Label fx:id="label25" alignment="CENTER" prefHeight="104.0" prefWidth="110.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                              <Label fx:id="label13" alignment="CENTER" prefHeight="65.0" prefWidth="93.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label fx:id="label23" alignment="CENTER" prefHeight="76.0" prefWidth="91.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <Label fx:id="label33" alignment="CENTER" prefHeight="51.0" prefWidth="69.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                              <Label fx:id="label43" alignment="CENTER" prefHeight="47.0" prefWidth="68.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                              <Label fx:id="label53" alignment="CENTER" prefHeight="41.0" prefWidth="65.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                              <Label fx:id="label14" alignment="CENTER" prefHeight="54.0" prefWidth="81.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label fx:id="label24" alignment="CENTER" prefHeight="48.0" prefWidth="68.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                              <Label fx:id="label34" alignment="CENTER" prefHeight="45.0" prefWidth="68.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                              <Label fx:id="label44" alignment="CENTER" prefHeight="28.0" prefWidth="60.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                              <Label fx:id="label54" alignment="CENTER" prefHeight="67.0" prefWidth="80.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                              <Label fx:id="label15" alignment="CENTER" prefHeight="51.0" prefWidth="72.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label fx:id="label25" alignment="CENTER" prefHeight="47.0" prefWidth="70.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                              <Label fx:id="label35" alignment="CENTER" prefHeight="46.0" prefWidth="60.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                              <Label fx:id="label45" alignment="CENTER" prefHeight="39.0" prefWidth="64.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                              <Label fx:id="label55" alignment="CENTER" prefHeight="61.0" prefWidth="67.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                              <Label fx:id="label16" alignment="CENTER" prefHeight="49.0" prefWidth="90.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <Label fx:id="label26" alignment="CENTER" prefHeight="43.0" prefWidth="76.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                              <Label fx:id="label36" alignment="CENTER" prefHeight="72.0" prefWidth="75.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                              <Label fx:id="label46" alignment="CENTER" prefHeight="46.0" prefWidth="66.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                              <Label fx:id="label56" alignment="CENTER" prefHeight="82.0" prefWidth="85.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                              <Label fx:id="label17" alignment="CENTER" prefHeight="50.0" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <Label fx:id="label27" alignment="CENTER" prefHeight="52.0" prefWidth="57.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                              <Label fx:id="label37" alignment="CENTER" prefHeight="53.0" prefWidth="63.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                              <Label fx:id="label47" alignment="CENTER" prefHeight="51.0" prefWidth="68.0" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                              <Label fx:id="label57" alignment="CENTER" prefHeight="80.0" prefWidth="64.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                              <Label fx:id="label18" alignment="CENTER" prefHeight="49.0" prefWidth="59.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                              <Label fx:id="label28" alignment="CENTER" prefHeight="53.0" prefWidth="77.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                              <Label fx:id="label38" alignment="CENTER" prefHeight="66.0" prefWidth="113.0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                              <Label fx:id="label48" alignment="CENTER" prefHeight="81.0" prefWidth="78.0" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+                              <Label fx:id="label58" alignment="CENTER" prefHeight="42.0" prefWidth="60.0" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+                              <Label fx:id="label19" alignment="CENTER" prefHeight="75.0" prefWidth="67.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                              <Label fx:id="label10" alignment="CENTER" prefHeight="60.0" prefWidth="68.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                              <Label fx:id="label111" alignment="CENTER" prefHeight="55.0" prefWidth="77.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                              <Label fx:id="label112" alignment="CENTER" prefHeight="48.0" prefWidth="78.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                              <Label fx:id="label113" alignment="CENTER" prefHeight="46.0" prefWidth="75.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                              <Label fx:id="label29" alignment="CENTER" prefHeight="64.0" prefWidth="77.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                              <Label fx:id="label210" alignment="CENTER" prefHeight="49.0" prefWidth="70.0" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                              <Label fx:id="label211" alignment="CENTER" prefHeight="41.0" prefWidth="101.0" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+                              <Label fx:id="label212" alignment="CENTER" prefHeight="46.0" prefWidth="69.0" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+                              <Label fx:id="label213" alignment="CENTER" prefHeight="40.0" prefWidth="69.0" GridPane.columnIndex="2" GridPane.rowIndex="13" />
+                              <Label fx:id="label39" alignment="CENTER" prefHeight="53.0" prefWidth="66.0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                              <Label fx:id="label310" alignment="CENTER" prefHeight="85.0" prefWidth="82.0" GridPane.columnIndex="3" GridPane.rowIndex="10" />
+                              <Label fx:id="label311" alignment="CENTER" prefHeight="94.0" prefWidth="89.0" GridPane.columnIndex="3" GridPane.rowIndex="11" />
+                              <Label fx:id="label312" alignment="CENTER" prefHeight="73.0" prefWidth="119.0" GridPane.columnIndex="3" GridPane.rowIndex="12" />
+                              <Label fx:id="label313" alignment="CENTER" prefHeight="61.0" prefWidth="67.0" GridPane.columnIndex="3" GridPane.rowIndex="13" />
+                              <Label fx:id="label49" alignment="CENTER" prefHeight="65.0" prefWidth="79.0" GridPane.columnIndex="4" GridPane.rowIndex="9" />
+                              <Label fx:id="label410" alignment="CENTER" prefHeight="48.0" prefWidth="69.0" GridPane.columnIndex="4" GridPane.rowIndex="10" />
+                              <Label fx:id="label411" alignment="CENTER" prefHeight="49.0" prefWidth="79.0" GridPane.columnIndex="4" GridPane.rowIndex="11" />
+                              <Label fx:id="label412" alignment="CENTER" prefHeight="54.0" prefWidth="86.0" GridPane.columnIndex="4" GridPane.rowIndex="12" />
+                              <Label fx:id="label413" alignment="CENTER" prefHeight="59.0" prefWidth="101.0" GridPane.columnIndex="4" GridPane.rowIndex="13" />
+                              <Label fx:id="label59" alignment="CENTER" prefHeight="53.0" prefWidth="92.0" GridPane.columnIndex="5" GridPane.rowIndex="9" />
+                              <Label fx:id="label510" alignment="CENTER" prefHeight="33.0" prefWidth="63.0" GridPane.columnIndex="5" GridPane.rowIndex="10" />
+                              <Label fx:id="label511" alignment="CENTER" prefHeight="53.0" prefWidth="86.0" GridPane.columnIndex="5" GridPane.rowIndex="11" />
+                              <Label fx:id="label512" alignment="CENTER" prefHeight="46.0" prefWidth="55.0" GridPane.columnIndex="5" GridPane.rowIndex="12" />
+                              <Label fx:id="label513" alignment="CENTER" prefHeight="61.0" prefWidth="74.0" GridPane.columnIndex="5" GridPane.rowIndex="13" />
+                           </children>
+                        </GridPane>
+                        <Label text="待选课程" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+                        <Label text="当前课表" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+                     </children>
+                  </GridPane>
+                  <GridPane fx:id="Search_Pane" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="100.0" prefWidth="50.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="142.80001831054688" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="275.1999816894531" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TableView fx:id="SearchTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="331.0" prefWidth="583.0" style="-fx-border-color: rgb(50,50,50);" GridPane.rowIndex="1">
+                           <columns>
+                              <TableColumn fx:id="Search_ClassNum" maxWidth="1.7976931348623157E308" prefWidth="47.79998779296875" text="课程号" />
+                              <TableColumn fx:id="Search_ClassName" maxWidth="1.7976931348623157E308" prefWidth="76.20001220703125" text="课程名" />
+                              <TableColumn fx:id="Search_Score" maxWidth="1.7976931348623157E308" prefWidth="36.79998779296875" text="学分" />
+                              <TableColumn fx:id="Search_TeacherNum" maxWidth="1.7976931348623157E308" prefWidth="58.0" text="教师号" />
+                              <TableColumn fx:id="Search_TeacherName" maxWidth="1.7976931348623157E308" prefWidth="50.0" text="教师名" />
+                              <TableColumn fx:id="Search_Time" maxWidth="1.7976931348623157E308" prefWidth="85.4000244140625" text="上课时间" />
+                              <TableColumn fx:id="Search_School" maxWidth="1.7976931348623157E308" prefWidth="56.20001220703125" text="校区" />
+                              <TableColumn fx:id="Search_Limit" maxWidth="1.7976931348623157E308" prefWidth="67.79998779296875" text="限制条件" />
+                              <TableColumn fx:id="Search_PeopleNum" maxWidth="1.7976931348623157E308" prefWidth="47.79998779296875" text="人数" />
+                              <TableColumn fx:id="Search_Choice" maxWidth="35.0" prefWidth="35.0" text="选择" />
+                           </columns>
+                        </TableView>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <GridPane prefHeight="156.0" prefWidth="538.0" style="-fx-background-color: rgba(239,239,239);">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="35.59999084472656" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="38.19999694824219" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <TextField fx:id="S_ClassNum" alignment="CENTER" promptText="课程号" GridPane.columnIndex="1" />
+                                    <TextField fx:id="S_TeacherName" alignment="CENTER" promptText="教师名" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="S_Time" alignment="CENTER" promptText="例：一1-2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="S_Score" alignment="CENTER" promptText="学分" GridPane.columnIndex="3" GridPane.halignment="LEFT" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" text="课程号：" GridPane.halignment="RIGHT" />
+                                    <Label alignment="CENTER" text="教师名：" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                    <Label alignment="CENTER" text="时   间：" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                                    <Label alignment="CENTER" text="学   分：" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
+                                    <Label alignment="CENTER" text="校   区：" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                    <CheckBox fx:id="S_Morning" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: rgba(49,53,62);" text="不上早课" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
+                                    <CheckBox fx:id="S_noon" mnemonicParsing="false" style="-fx-background-color: rgba(248,168,3,0.7);" text="不上午课" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                                    <CheckBox fx:id="S_Friday" mnemonicParsing="false" style="-fx-background-color: rgba(49,53,62);" text="不上周五" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                                    <ChoiceBox fx:id="S_School" maxWidth="1.7976931348623157E308" prefHeight="12.0" prefWidth="179.0" value="本部" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                    	<String fx:value="本部" />
+                                    	<String fx:value="延长" />
+                                    	<String fx:value="嘉定" />
+                                    </ChoiceBox>
+                                    <Button fx:id="Seach_Button" mnemonicParsing="false" onAction="#Seach_Buttonaction" prefHeight="28.0" prefWidth="179.0" style="-fx-background-color: rgba(248,168,3,0.7);" text="查询" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                    <Button fx:id="Search_Choice_Button" mnemonicParsing="false" onAction="#Search_Choice_Buttonaction" prefHeight="28.0" prefWidth="179.0" style="-fx-background-color: rgba(248,168,3,0.7);" text="加入待选课程" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </GridPane>
+                  <GridPane fx:id="Had_Pane" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="202.19998168945312" minHeight="10.0" prefHeight="119.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="298.0" minHeight="10.0" prefHeight="298.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TableView fx:id="RankTable" editable="true" prefHeight="298.0" prefWidth="522.0" GridPane.rowIndex="1">
+                           <columns>
+                              <TableColumn fx:id="ClassNum" maxWidth="1.7976931348623157E308" prefWidth="50.20001220703125" text="课程号" />
+                              <TableColumn fx:id="ClassName" maxWidth="1.7976931348623157E308" prefWidth="63.60003662109375" text="课程名" />
+                              <TableColumn fx:id="TeacherNum" prefWidth="83.4000244140625" text="教师号" />
+                              <TableColumn fx:id="TeacherName" maxWidth="1.7976931348623157E308" prefWidth="76.4000244140625" text="教师名" />
+                              <TableColumn fx:id="Time" prefWidth="88.39996337890625" text="上课时间" />
+                              <TableColumn fx:id="PeopleNum" maxWidth="1.7976931348623157E308" prefWidth="74.800048828125" text="额定人数" />
+                              <TableColumn fx:id="Rank" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="50.0" text="排名" />
+                              <TableColumn fx:id="ExitClass" maxWidth="1.7976931348623157E308" prefWidth="72.0" text="退课" />
+                           </columns>
+                        </TableView>
+                        <Button fx:id="ExitButton" mnemonicParsing="false" onAction="#ExitButtonaction" text="退课" />
+                     </children>
+                  </GridPane>
+                  <Pane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="36.0" prefWidth="838.0" style="-fx-background-color: rgba(50,50,50);" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                     <children>
+                        <ImageView fitHeight="27.0" fitWidth="26.0" layoutX="394.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@shu.jpg" />
+                           </image>
+                        </ImageView>
+                        <Label alignment="CENTER" layoutX="420.0" layoutY="2.0" prefHeight="25.0" prefWidth="144.0" text="上海大学选课助手" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="76.0" prefWidth="129.0" style="-fx-background-color: rgba(50,50,50);" text="SHU-Helper" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(248,168,3);" GridPane.rowIndex="1" />
+                  <Pane prefHeight="0.0" prefWidth="568.0" style="-fx-background-color: rgba(248,168,3);" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+         </content>
+      </Tab>
+    <Tab fx:id="CJ_IdentTab" closable="false" onSelectionChanged="#CJ_Tabaction" text="教务处管理系统">
          <content>
             <GridPane>
               <columnConstraints>

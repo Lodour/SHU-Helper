@@ -17,7 +17,7 @@ public class MainFrameWindow{
 	{
 		FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("MainFrame.fxml"));
 		Parent root = fxmlloader.load();
-		Scene scene = new Scene(root,600,400);
+		Scene scene = new Scene(root,687,481);
 		controller = fxmlloader.getController(); 
 		controller.setStage(stage);
 	    controller.setScene(scene);

@@ -14,7 +14,10 @@
             <Image url="@Captcha3.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="LoginButton" layoutX="144.0" layoutY="256.0" mnemonicParsing="false" onAction="#LoginButtonEvent" prefHeight="30.0" prefWidth="243.0" style="-fx-background-color: rgba(97,149,189,0.6);" text="Sign In" textFill="WHITE" />
+      <Button fx:id="LoginButton" layoutX="144.0" layoutY="256.0" mnemonicParsing="false" onAction="#LoginButtonEvent" prefHeight="30.0" prefWidth="243.0" style="-fx-background-color: rgba(97,149,189,0.6); -fx-background-radius: 1.0em;" text="Sign In" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
       <Button fx:id="ResetButton" layoutX="316.0" layoutY="302.0" mnemonicParsing="false" onAction="#ResetButtonEvent" prefHeight="23.0" prefWidth="70.0" style="-fx-background-color: rgba(97,149,189,0.6);" text="Reverse" textFill="WHITE" />
       <PasswordField fx:id="PasswordText" alignment="CENTER" layoutX="144.0" layoutY="206.0" prefHeight="30.0" prefWidth="243.0" promptText="Password" />
       <TextField fx:id="UsernameText" alignment="CENTER" layoutX="144.0" layoutY="159.0" prefHeight="30.0" prefWidth="243.0" promptText="Student ID" />

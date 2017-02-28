@@ -21,7 +21,7 @@
       </Pane>
       <Pane layoutX="1.0" layoutY="48.0" prefHeight="209.0" prefWidth="266.0" style="-fx-background-color: #FFFFFF;">
          <children>
-            <TextField fx:id="CJ_Text" alignment="CENTER" layoutX="25.0" layoutY="51.0" prefHeight="37.0" prefWidth="217.0" promptText="请输入验证码" style="-fx-border-width: 2; -fx-background-color: #ffffff; -fx-border-color: #CCD3D7;">
+            <TextField fx:id="CJ_Text" alignment="CENTER" layoutX="25.0" layoutY="51.0" prefHeight="37.0" prefWidth="217.0" promptText="请输入验证码" style="-fx-border-width: 2; -fx-background-color: #ffffff; -fx-border-color: #CCD3D7; -fx-background-radius: 2em;">
                <font>
                   <Font size="14.0" />
                </font>
@@ -31,14 +31,14 @@
                   <Image url="@Identity.jpg" />
                </image>
             </ImageView>
-            <Button fx:id="CJ_Button" layoutX="25.0" layoutY="92.0" mnemonicParsing="false" onAction="#CJ_ButtonAction" prefHeight="37.0" prefWidth="217.0" style="-fx-background-color: #F97F77;" text="LOG IN" textFill="WHITE">
+            <Button fx:id="CJ_Button" layoutX="25.0" layoutY="92.0" mnemonicParsing="false" onAction="#CJ_ButtonAction" prefHeight="37.0" prefWidth="217.0" style="-fx-background-color: #F97F77; -fx-background-radius: 1em;" text="LOG IN" textFill="WHITE">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
             <Hyperlink layoutX="77.0" layoutY="4.0" text="www.cj.shu.edu.cn" textAlignment="CENTER" underline="true" />
             <Label fx:id="CJ_Change" layoutX="73.0" layoutY="188.0" onMouseClicked="#CJ_ChangeImage" text="点击图片，更换验证码" textFill="#5488e1" />
-            <Label fx:id="CJ_Prompt" alignment="CENTER" contentDisplay="CENTER" layoutX="38.0" layoutY="25.0" prefHeight="27.0" prefWidth="192.0" text="输入错误请重新输入" textAlignment="CENTER" textFill="#f97f77" />
+            <Label fx:id="CJ_Prompt" alignment="CENTER" contentDisplay="CENTER" layoutX="38.0" layoutY="25.0" prefHeight="27.0" prefWidth="192.0" textAlignment="CENTER" textFill="#f97f77" />
          </children>
          <opaqueInsets>
             <Insets />

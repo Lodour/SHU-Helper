@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="41.0" prefWidth="188.0" style="-fx-background-radius: 3em; -fx-background-color: rgb(41,41,200);" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="shuhelper.ui.ChoseFrame">
+   <children>
+      <Pane fx:id="ChosePane" prefHeight="160.0" prefWidth="188.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3em;" visible="false">
+         <children>
+            <Button fx:id="FirstChose" alignment="CENTER" layoutY="40.0" mnemonicParsing="false" onAction="#FirstAction" prefHeight="40.0" prefWidth="187.0" style="-fx-background-radius: 2em;" text="当前暂无学期" />
+            <Button fx:id="SecondChose" alignment="CENTER" layoutX="1.0" layoutY="80.0" mnemonicParsing="false" onAction="#SecondAction" prefHeight="40.0" prefWidth="187.0" style="-fx-background-radius: 2em;" text="当前暂无学期" />
+            <Button fx:id="SureButton" layoutX="80.0" layoutY="125.0" mnemonicParsing="false" onAction="#SureAction" prefHeight="28.0" prefWidth="28.0" style="-fx-background-radius: 4em; -fx-background-color: #ffffff; -fx-border-color: red; -fx-border-radius: 3em;" text="X" textFill="RED" />
+         </children>
+      </Pane>
+      <Button fx:id="ChoseButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#ChoseAction" prefHeight="40.0" prefWidth="188.0" style="-fx-background-color: red; -fx-background-radius: 2em;" text="选择当前学期            ▼" textAlignment="RIGHT" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

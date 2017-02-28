@@ -17,7 +17,7 @@ public class LoginFrameWindow {
 	{	
 		FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("LoginFrame.fxml"));
 		Parent root = fxmlloader.load();
-		Scene scene = new Scene(root,500,347);
+		Scene scene = new Scene(root,505,347);
 		controller = fxmlloader.getController(); 
 		controller.setStage(stage);
 	    controller.setScene(scene);

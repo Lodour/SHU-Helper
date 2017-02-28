@@ -38,7 +38,7 @@
             </Button>
             <Hyperlink layoutX="77.0" layoutY="4.0" text="www.xk.shu.edu.cn" textAlignment="CENTER" underline="true" />
             <Label fx:id="XK_Change" layoutX="73.0" layoutY="188.0" onMouseClicked="#XK_ChangeImage" text="点击图片，更换验证码" textFill="#5488e1" />
-            <Label fx:id="XK_Prompt" alignment="CENTER" contentDisplay="CENTER" layoutX="38.0" layoutY="25.0" prefHeight="27.0" prefWidth="192.0" text="输入错误请重新输入" textAlignment="CENTER" textFill="#f97f77" />
+            <Label fx:id="XK_Prompt" alignment="CENTER" contentDisplay="CENTER" layoutX="38.0" layoutY="25.0" prefHeight="27.0" prefWidth="192.0" textAlignment="CENTER" textFill="#f97f77" />
          </children>
          <opaqueInsets>
             <Insets />

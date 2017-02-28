@@ -82,7 +82,12 @@ public class XK_IdentFrame extends Controller{
         			String labelText = "登录成功！";
         			XK_Prompt.setText(labelText);
         			stage.close();
-        			
+        			try {
+						shuhelpapp.test.initCourseStatus(shuhelpapp.test.selectedCourse(shuhelpapp.XK));
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
         		}
         		else if(res.equals("验证码错误！"))
         		{
@@ -93,9 +98,10 @@ public class XK_IdentFrame extends Controller{
         		{
         			String labelText = "账号密码错误请重新输入";
         			XK_Prompt.setText(labelText);
-        			XK_Button.getScene().getWindow().hide();
+        			stage.close();
         			try {
 						PromtFrame.Start();
+						PromtFrame.Show();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
